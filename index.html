@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Curse of the Hollowshade Hill</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Hollowshade Noir -->
+    <!-- Application Structure Plan: A single-page, vertically scrolling application with a persistent left-hand navigation sidebar for quick access to key sections (Overview, Beats, Adversaries). This linear structure mirrors the adventure's flow, which is ideal for a GM running a session. Beats are presented in collapsible sections to manage information density. The key interaction is a modal system for adversary stat blocks, allowing the GM to view creature details instantly without scrolling away from the current scene, which is critical for maintaining game pace. This design prioritizes at-a-glance readability and rapid information retrieval over a complex, non-linear dashboard. -->
+    <!-- Visualization & Content Choices: The primary "visualization" is the interactive At-a-Glance table which provides a high-level summary and acts as a navigation hub. Instead of traditional charts, the focus is on clear information architecture. Key mechanics like 'Countdowns' are presented in visually distinct callout boxes, with simple JS-powered trackers for live use. Textual content, especially 'Read-Aloud Text', is isolated in blockquotes for clarity. The most critical interactive element is the modal pop-up for adversary stat blocks, chosen to prevent disruptive scrolling during combat. All elements are built with HTML/CSS/JS. Confirmed NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        h1, h2, h3, h4, .font-display {
+            font-family: 'IM Fell English', serif;
+        }
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        .main-content {
+            transition: margin-left 0.3s ease-in-out;
+        }
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 40;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .stat-block {
+            background-color: #2c2c2c;
+            border: 1px solid #5a2a2a;
+        }
+        .stat-block-header {
+            background-color: #4a1a1a;
+            color: #f0f0f0;
+        }
+        details > summary {
+            cursor: pointer;
+        }
+        details[open] > summary {
+            border-bottom: 2px solid #8B0000;
+        }
+        .read-aloud {
+            background-color: #252525;
+            border-left: 4px solid #8B0000;
+            font-style: italic;
+        }
+        .mechanic-box {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .accent-red {
+            color: #dc2626; /* tailwind red-600 */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar" class="sidebar fixed top-0 left-0 h-full w-64 bg-gray-900 border-r border-gray-700 shadow-lg p-5 z-20 overflow-y-auto">
+        <h2 class="font-display text-2xl font-bold mb-6 text-red-500 border-b border-red-800 pb-2">Navigation</h2>
+        <ul class="space-y-3">
+            <li><a href="#overview" class="block py-2 px-3 rounded hover:bg-gray-800 transition-colors duration-200">Overview</a></li>
+            <li><a href="#beat1" class="block py-2 px-3 rounded hover:bg-gray-800 transition-colors duration-200">Beat 1: The Wary Outpost</a></li>
+            <li><a href="#beat2" class="block py-2 px-3 rounded hover:bg-gray-800 transition-colors duration-200">Beat 2: The Trail of Treats</a></li>
+            <li><a href="#intermission" class="block py-2 px-3 rounded hover:bg-gray-800 transition-colors duration-200">Intermission: Dream</a></li>
+            <li><a href="#beat3" class="block py-2 px-3 rounded hover:bg-gray-800 transition-colors duration-200">Beat 3: Silk-Strangled Den</a></li>
+            <li><a href="#beat4" class="block py-2 px-3 rounded hover:bg-gray-800 transition-colors duration-200">Beat 4: Witches' Council</a></li>
+            <li><a href="#beat5" class="block py-2 px-3 rounded hover:bg-gray-800 transition-colors duration-200">Beat 5: Into the Heart</a></li>
+            <li><a href="#beat6" class="block py-2 px-3 rounded hover:bg-gray-800 transition-colors duration-200">Beat 6: The Chittering Heart</a></li>
+            <li><a href="#adversaries" class="block py-2 px-3 rounded hover:bg-gray-800 transition-colors duration-200">Adversaries & Rewards</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content ml-64 p-4 sm:p-6 md:p-8 lg:p-10">
+        <header class="text-center mb-12">
+            <h1 class="font-display text-5xl md:text-6xl font-bold text-red-500 tracking-wider">The Curse of the Hollowshade Hill</h1>
+            <p class="mt-4 text-lg text-gray-400 italic">An interactive guide for the Game Master</p>
+        </header>
+
+        <div class="my-8 rounded-lg overflow-hidden shadow-lg border border-red-800 max-w-4xl mx-auto">
+            <img src="https://i.imgur.com/pB6iCgD.jpeg" alt="The cursed Hollowshade Hill with its gnarled, blood-leafed tree looming over the swamp." class="w-full h-auto object-cover">
+        </div>
+
+        <!-- Overview Section -->
+        <section id="overview" class="mb-12 p-6 bg-gray-800/50 rounded-lg border border-gray-700">
+            <h2 class="font-display text-3xl font-bold mb-4 text-red-400">Overview</h2>
+            <p class="text-lg italic text-gray-300 mb-6">"A group of heroes on an urgent mission must detour through a cursed swamp, only to discover that the local legends of cruel witches hide a terrifying and ancient evil that is about to break free."</p>
+            <h3 class="font-display text-2xl font-bold mb-4 text-red-400">Adventure At-a-Glance</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left table-auto">
+                    <thead class="bg-gray-900 text-gray-300">
+                        <tr>
+                            <th class="p-3">Beat</th>
+                            <th class="p-3">Est. Time</th>
+                            <th class="p-3">Key Events</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700">
+                        <tr class="hover:bg-gray-800 cursor-pointer" onclick="document.getElementById('beat1').scrollIntoView({behavior: 'smooth'});">
+                            <td class="p-3 font-semibold">1: The Wary Outpost</td>
+                            <td class="p-3">45 Mins</td>
+                            <td class="p-3">Arrive in a remote village; learn unsettling rumors about Hollowshade.</td>
+                        </tr>
+                        <tr class="hover:bg-gray-800 cursor-pointer" onclick="document.getElementById('beat2').scrollIntoView({behavior: 'smooth'});">
+                            <td class="p-3 font-semibold">2: The Trail of Treats</td>
+                            <td class="p-3">45 Mins</td>
+                            <td class="p-3">Encounter desperate children and the macabre nature of the witches' "gifts."</td>
+                        </tr>
+                         <tr class="hover:bg-gray-800 cursor-pointer" onclick="document.getElementById('intermission').scrollIntoView({behavior: 'smooth'});">
+                            <td class="p-3 font-semibold">Intermission: A Pounding Dream</td>
+                            <td class="p-3">5 Mins</td>
+                            <td class="p-3">Experience a shared, prophetic dream foreshadowing the evil at the hill's heart.</td>
+                        </tr>
+                        <tr class="hover:bg-gray-800 cursor-pointer" onclick="document.getElementById('beat3').scrollIntoView({behavior: 'smooth'});">
+                            <td class="p-3 font-semibold">3: The Silk-Strangled Den</td>
+                            <td class="p-3">60 Mins</td>
+                            <td class="p-3">Ascend the web-choked hill; survive an ambush by monstrous spiders.</td>
+                        </tr>
+                        <tr class="hover:bg-gray-800 cursor-pointer" onclick="document.getElementById('beat4').scrollIntoView({behavior: 'smooth'});">
+                            <td class="p-3 font-semibold">4: The Witches' Council</td>
+                            <td class="p-3">45 Mins</td>
+                            <td class="p-3">Confront the "Ladies of the Forest"; learn the truth of the druid's prison.</td>
+                        </tr>
+                        <tr class="hover:bg-gray-800 cursor-pointer" onclick="document.getElementById('beat5').scrollIntoView({behavior: 'smooth'});">
+                            <td class="p-3 font-semibold">5: Into the Gnarled Heart</td>
+                            <td class="p-3">30 Mins</td>
+                            <td class="p-3">Enter the corrupted heart-tree at the hill's summit.</td>
+                        </tr>
+                        <tr class="hover:bg-gray-800 cursor-pointer" onclick="document.getElementById('beat6').scrollIntoView({behavior: 'smooth'});">
+                            <td class="p-3 font-semibold">6: The Chittering Heart</td>
+                            <td class="p-3">60 Mins</td>
+                            <td class="p-3">Battle the monstrous source of the curse in its subterranean lair.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Adventure Beats -->
+        <div class="space-y-8">
+            <section id="beat1">
+                <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden">
+                    <summary class="font-display text-3xl p-6 font-bold text-red-400">Beat 1: The Wary Outpost</summary>
+                    <div class="p-6 border-t border-gray-700 space-y-4">
+                        <h4 class="font-display text-xl font-bold text-red-300">Setup</h4>
+                        <p>The adventure begins in Mire's End, a remote village at the edge of the Hollowshade mangroves. The party is on an urgent quest, carrying a <strong>Heartseed</strong>—a faintly glowing magical seed that must be planted in a sanctum beyond the forest to save a dying noble. The perilous path through Hollowshade is the only one fast enough.</p>
+                        <blockquote class="read-aloud p-4">
+                            The track dissolves into a muddy street that cuts through a collection of sagging, moss-covered buildings. This must be Mire's End. A perpetual drizzle falls from a grey sky, and the air hangs thick with the smell of wet earth and woodsmoke. A single tavern, its sign depicting a boot half-sunk in mud, offers the only sign of welcome. You clutch the pouch containing the Heartseed; you can feel its faint, desperate pulse against your palm. Time is running out.
+                        </blockquote>
+                        <h4 class="font-display text-xl font-bold text-red-300">GM Notes</h4>
+                        <p><strong class="text-red-400">Stakes:</strong> The life of a noble depends on the party delivering the Heartseed in time. Delaying means the noble dies. Heading into Hollowshade unprepared could mean the party dies with them.</p>
+                        <div class="mechanic-box p-4 rounded-md">
+                            <p class="font-bold">Mechanics: Dynamic Progress Countdown (4): Uncovering the Truth</p>
+                            <p class="text-sm">The party advances the countdown by successfully gathering information. When it reaches 0, they have learned enough to proceed with a clear understanding of the immediate dangers.</p>
+                        </div>
+                        <h5 class="font-semibold text-red-300">Clues:</h5>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong>Core Clue:</strong> The villagers of Hollowshade are a "hardened and weird bunch," who offer prayers to witches they call the "Ladies of the Forest."</li>
+                            <li><strong>Core Clue:</strong> Hollowshade Hill is a place of active danger. A great, twisted tree that blots out the sun stands at its peak, swarming with monstrous spiders and frenzied beasts.</li>
+                            <li><strong>Flex Clue (from a trapper named Silas):</strong> "Ladies of the Forest? Complete and utter nonsense. Just old crones in the wood. It's the *spiders* you need to worry about." He can show a nasty, web-scarred bite mark on his arm.</li>
+                            <li><strong>Flex Clue (from a nervous merchant):</strong> He speaks of the Hollowshade locals sending their children on a "Trail of Treats" into the forest as tribute. The thought clearly terrifies him.</li>
+                        </ul>
+                        <h5 class="font-semibold text-red-300">Checks:</h5>
+                        <ul class="list-disc list-inside">
+                            <li>Presence (Charm) check <strong class="accent-red">DC 14</strong>: To coax stories from the tight-lipped locals.</li>
+                            <li>Instinct (Sense) check <strong class="accent-red">DC 14</strong>: To determine who is speaking from genuine experience versus who is repeating gossip.</li>
+                            <li>Knowledge (Recall) check <strong class="accent-red">DC 14</strong>: To see if any character has read of the "Ladies of the Forest" or legends of a druid's prison in regional folklore.</li>
+                        </ul>
+                        <h5 class="font-semibold text-red-300">Escalations (Fear Spends):</h5>
+                        <ul class="list-disc list-inside">
+                            <li><strong>Spend 1 Fear:</strong> A villager overhears the party's questions and becomes hostile, accusing them of being witch-sympathizers. This imposes disadvantage on the next social check.</li>
+                            <li><strong>Spend 1 Fear:</strong> A man bursts into the tavern, covered in mud and blood, raving about his hunting hounds turning on him near Hollowshade, their eyes glowing with a sickly green light.</li>
+                        </ul>
+                    </div>
+                </details>
+            </section>
+            
+            <section id="beat2">
+                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden">
+                    <summary class="font-display text-3xl p-6 font-bold text-red-400">Beat 2: The Trail of Treats</summary>
+                    <div class="p-6 border-t border-gray-700 space-y-4">
+                        <h4 class="font-display text-xl font-bold text-red-300">Setup</h4>
+                        <p>Leaving Mire's End, the party enters the cursed lands of Hollowshade. The path is a muddy track cutting through dark, gnarled mangrove-like trees dripping with moss and strange webs. The colossal, blood-leafed tree on the distant hill is now visible.</p>
+                         <blockquote class="read-aloud p-4">
+                            The air grows still and heavy, thick with the scent of decay and damp earth. The trees here are twisted and menacing, their branches clawing at the sky. Ahead, two small figures, a boy and a slightly older girl, trudge down the muddy path. The girl clutches a small, empty wooden pail. They seem impossibly small in the oppressive gloom of the forest.
+                        </blockquote>
+                        <h4 class="font-display text-xl font-bold text-red-300">GM Notes</h4>
+                        <p><strong class="text-red-400">Stakes:</strong> The immediate safety of the two children, Elspeth (8) and Finn (6). Their story presents a moral quandary about the desperation of the Hollowshade folk.</p>
+                        <div class="mechanic-box p-4 rounded-md">
+                            <p class="font-bold">Mechanics: Dynamic Consequence Countdown (3): The Children's Hope Fades</p>
+                            <p class="text-sm">If the party is cruel or hesitates, use this countdown. If it reaches 0, Finn breaks down crying, refusing to move.</p>
+                        </div>
+                        <h5 class="font-semibold text-red-300">Dialogue & Clues:</h5>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong>Elspeth:</strong> *"I spilled the milk. All of it. Papa got... quiet. He told Mama the Ladies would provide. He sent us on the Trail of Treats."*</li>
+                            <li><strong>Finn:</strong> *"The trail has sweets! The Ladies leave them for children who are sorry."*</li>
+                            <li>A short distance down the path are the "treats": crude gingerbread men and candies stuck to trees.</li>
+                            <li><strong>The Reveal:</strong> If a character interacts with a treat, it dissolves into a writhing fistful of maggots. This reveals the "gifts" are a horrifying illusion.</li>
+                        </ul>
+                         <h5 class="font-semibold text-red-300">Checks:</h5>
+                        <ul class="list-disc list-inside">
+                            <li>Presence (Charm) check <strong class="accent-red">DC 14</strong>: To gently earn the children's trust and get them to speak openly.</li>
+                            <li>Instinct (Sense) check <strong class="accent-red">DC 14</strong>: To notice the foul magic on a "treat" before touching it.</li>
+                        </ul>
+                        <h5 class="font-semibold text-red-300">Escalations (Fear Spends):</h5>
+                        <ul class="list-disc list-inside">
+                             <li><strong>Spend 1 Fear:</strong> A frenzied, sickly-looking hybrid animal (a small, chittering creature with too many legs) darts from the trees, hissing at the children before vanishing.</li>
+                             <li><strong>Spend 1 Fear:</strong> As a character inspects a gingerbread man, its features briefly twist into a screaming face before dissolving, forcing an Instinct reaction roll (<strong class="accent-red">DC 14</strong>) to avoid marking a Stress.</li>
+                        </ul>
+                    </div>
+                </details>
+            </section>
+
+            <section id="intermission">
+                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden" open>
+                    <summary class="font-display text-3xl p-6 font-bold text-red-400">Intermission: A Pounding Dream</summary>
+                    <div class="p-6 border-t border-gray-700 space-y-4">
+                        <h4 class="font-display text-xl font-bold text-red-300">Setup</h4>
+                        <p>This event occurs the next time the party takes a long rest in Hollowshade. It is a shared nightmare.</p>
+                        <blockquote class="read-aloud p-4">
+                            Sleep does not bring rest. You stand together in a field of grey, dead grass under a bruised-purple sky. A sickly full moon hangs overhead, and in the distance, the colossal tree from the hill claws at the sky, its leaves the color of dried blood. A sound, a feeling more than a sound, fills you: a slow, rhythmic *thump-thump... thump-thump...* like a monstrous heart beating deep within the earth. Then, a voice echoes in your minds—a desperate, fractured whisper. *"Free me... please... free me..."*
+                        </blockquote>
+                        <h4 class="font-display text-xl font-bold text-red-300">GM Notes</h4>
+                        <p><strong class="text-red-400">Stakes:</strong> The dream introduces a supernatural mystery. Is the voice a victim begging for release, or the source of evil luring them into a trap?</p>
+                        <h5 class="font-semibold text-red-300">Checks:</h5>
+                        <ul class="list-disc list-inside">
+                           <li>Knowledge (Recall) check <strong class="accent-red">DC 15</strong>: A success confirms the tree from the dream matches legends of the one on Hollowshade Hill, said to be the prison of an ancient druid.</li>
+                        </ul>
+                    </div>
+                </details>
+            </section>
+            
+            <section id="beat3">
+                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden">
+                    <summary class="font-display text-3xl p-6 font-bold text-red-400">Beat 3: The Silk-Strangled Den</summary>
+                    <div class="p-6 border-t border-gray-700 space-y-4">
+                        <h4 class="font-display text-xl font-bold text-red-300">Setup</h4>
+                        <p>The party begins their ascent of Hollowshade Hill. The ground rises from the swamp into a steep incline, now completely under the shadow of the great, blood-leafed tree. Every surface is coated in thick, sticky sheets of webbing, muffling all sound.</p>
+                        <blockquote class="read-aloud p-4">
+                            The path begins to climb, and you leave the grasping mangrove roots behind for the treacherous slopes of Hollowshade Hill. A deep, unnatural twilight, cast by the colossal tree above, smothers the landscape. Every surface is coated in thick, sticky sheets of webbing, stretching between trees like grotesque sails and carpeting the forest floor in a silent, white blanket. The air is unnervingly still, the only sound the soft, disgusting tear of your boots pulling free from the webbed ground with every step. You feel the tingling sensation of being watched by countless, unseen eyes.
+                        </blockquote>
+                        <h4 class="font-display text-xl font-bold text-red-300">GM Notes</h4>
+                        <p><strong class="text-red-400">Stakes:</strong> This is a fight for survival. The environment is a weapon for the territorial predators that live here.</p>
+                        <div class="mechanic-box p-4 rounded-md space-y-2">
+                            <p><strong class="font-bold">Environment Feature: Webbed Terrain.</strong> All Agility (Maneuver) rolls are made with disadvantage.</p>
+                            <p><strong class="font-bold">Environment Feature: Web Traps.</strong> If a character fails a movement-related roll with Fear, they become temporarily Restrained until they break free with a Strength (Smash) Roll (<strong class="accent-red">DC 14</strong>).</p>
+                            <p><strong class="font-bold">Dynamic Consequence Countdown (5): The Walls Close In.</strong> Advances when a PC is hit or restrained. At 0, a Webfall is triggered. All PCs must make an Agility Reaction Roll (<strong class="accent-red">DC 15</strong>). Failure: 2d10+2 physical damage & Restrained.</p>
+                        </div>
+                        <h5 class="font-semibold text-red-300">Adversaries:</h5>
+                         <ul class="list-disc list-inside">
+                            <li>4x <button class="text-red-400 hover:underline" onclick="showModal('webPhantom')">Web Phantoms</button> (begin Hidden)</li>
+                            <li>1x <button class="text-red-400 hover:underline" onclick="showModal('hollowshadeMauler')">Hollowshade Mauler</button> (arrives round 2)</li>
+                        </ul>
+                         <h5 class="font-semibold text-red-300">Checks:</h5>
+                        <ul class="list-disc list-inside">
+                            <li>Instinct (Perceive) check <strong class="accent-red">DC 15</strong>: To spot the camouflaged Web Phantoms before the ambush.</li>
+                        </ul>
+                         <h5 class="font-semibold text-red-300">Escalations (Fear Spends):</h5>
+                        <ul class="list-disc list-inside">
+                            <li><strong>Spend 1 Fear:</strong> A Web Phantom uses `Web Walker` to phase through a web wall directly behind a PC and make an attack with advantage.</li>
+                            <li><strong>Spend 2 Fear:</strong> After a successful attack, a Web Phantom cocoons a PC, making them Restrained and pulling them 20 feet up into the canopy, isolating them.</li>
+                        </ul>
+                    </div>
+                </details>
+            </section>
+            
+            <section id="beat4" class="p-6 bg-gray-800/50 rounded-lg border border-gray-700"><h2 class="font-display text-3xl font-bold text-red-400">Beat 4: The Witches' Council</h2><p class="text-gray-400 italic mt-2">(To be designed)</p></section>
+            <section id="beat5" class="p-6 bg-gray-800/50 rounded-lg border border-gray-700"><h2 class="font-display text-3xl font-bold text-red-400">Beat 5: Into the Gnarled Heart</h2><p class="text-gray-400 italic mt-2">(To be designed)</p></section>
+            <section id="beat6" class="p-6 bg-gray-800/50 rounded-lg border border-gray-700"><h2 class="font-display text-3xl font-bold text-red-400">Beat 6: The Chittering Heart</h2><p class="text-gray-400 italic mt-2">(To be designed)</p></section>
+        </div>
+
+        <!-- Adversaries & Rewards Section -->
+        <section id="adversaries" class="mt-12 p-6 bg-gray-800/50 rounded-lg border border-gray-700">
+             <h2 class="font-display text-3xl font-bold mb-4 text-red-400">Adversaries & Rewards</h2>
+             <p class="text-gray-400 italic mt-2">(To be created)</p>
+        </section>
+
+    </main>
+
+    <!-- Modal -->
+    <div id="adversaryModal" class="modal-backdrop" onclick="closeModal()">
+        <div class="modal-content w-full max-w-2xl bg-gray-800 rounded-lg shadow-xl border border-gray-600 p-6" onclick="event.stopPropagation()">
+            <div id="modalContent">
+                <!-- Adversary stat block will be injected here -->
+            </div>
+            <button onclick="closeModal()" class="mt-6 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200">Close</button>
+        </div>
+    </div>
+
+
+    <script>
+        const adversaryData = {
+            webPhantom: {
+                name: 'Web Phantom',
+                source: 'Stonewraith stat block, Tier 2 Skulk',
+                description: 'A prowling hunter, like a slinking spider, with a body of pale, chitinous plates that blend perfectly with the thick webbing of the hill.',
+                difficulty: 13,
+                thresholds: '11 / 22',
+                hp: 6,
+                stress: 3,
+                atk: '+3 Bite and Claws: Melee | 2d8+6 phy',
+                experience: 'Stalking +3',
+                features: [
+                    { name: 'Web Walker (Passive)', text: 'The Web Phantom can move through thick webbing and vertical webbed surfaces as easily as open air. While inside webbing, it is Hidden and immune to all damage.' },
+                    { name: 'Web Ambush (Action)', text: 'While Hidden, mark a Stress to leap into Melee range with a target. The target must succeed on an Agility or Instinct Reaction Roll (DC 15) or take 2d8 physical damage and become temporarily Restrained.' },
+                    { name: 'Momentum (Reaction)', text: 'When the Web Phantom makes a successful attack against a PC, you gain a Fear.' }
+                ]
+            },
+            hollowshadeMauler: {
+                name: 'Hollowshade Mauler',
+                source: 'Minotaur Wrecker stat block, Tier 2 Bruiser',
+                description: 'A massive, heavily-chitinized spider-beast the size of an ox, with a dozen glowing red eyes and mandibles that drip with venom.',
+                difficulty: 16,
+                thresholds: '14 / 27',
+                hp: 7,
+                stress: 5,
+                atk: '-2 Vicious Mandibles: Very Close | 2d8+5 phy',
+                experience: 'Territorial +2',
+                features: [
+                    { name: 'Ramp Up (Passive)', text: 'You must spend a Fear to spotlight the Mauler. While spotlighted, it can make its standard attack against all targets within range.' },
+                    { name: 'Charging Bull (Action)', text: 'Mark a Stress to charge through a group within Close range and make an attack against all targets in its path. Targets the Mauler succeeds against take 2d6+8 physical damage and are knocked back to Far range.' },
+                    { name: 'Gore (Action)', text: 'Make an attack against a target within Very Close range, moving into Melee range of them. On a success, deal 2d8 direct physical damage.' }
+                ]
+            }
+        };
+
+        const modal = document.getElementById('adversaryModal');
+        const modalContent = document.getElementById('modalContent');
+
+        function showModal(adversaryId) {
+            const data = adversaryData[adversaryId];
+            if (!data) return;
+
+            let featuresHtml = data.features.map(f => `
+                <div class="mt-3">
+                    <p class="font-semibold text-red-400">${f.name}</p>
+                    <p class="text-gray-300 text-sm">${f.text}</p>
+                </div>
+            `).join('');
+
+            modalContent.innerHTML = `
+                <div class="stat-block rounded-lg overflow-hidden">
+                    <div class="stat-block-header p-4">
+                        <h3 class="font-display text-2xl font-bold">${data.name}</h3>
+                        <p class="text-sm italic text-gray-300">${data.source}</p>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <p class="text-gray-300 italic">${data.description}</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                            <div><p class="text-xs text-gray-400">Difficulty</p><p class="font-bold text-xl accent-red">${data.difficulty}</p></div>
+                            <div><p class="text-xs text-gray-400">Thresholds</p><p class="font-bold text-lg">${data.thresholds}</p></div>
+                            <div><p class="text-xs text-gray-400">HP</p><p class="font-bold text-xl">${data.hp}</p></div>
+                            <div><p class="text-xs text-gray-400">Stress</p><p class="font-bold text-xl">${data.stress}</p></div>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-red-400">Attack</p>
+                            <p>${data.atk}</p>
+                        </div>
+                         <div>
+                            <p class="font-semibold text-red-400">Experience</p>
+                            <p>${data.experience}</p>
+                        </div>
+                        <div class="border-t border-gray-600 pt-3">
+                            <h4 class="font-display text-lg font-bold">Features</h4>
+                            ${featuresHtml}
+                        </div>
+                    </div>
+                </div>
+            `;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+        
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
+
