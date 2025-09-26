@@ -86,89 +86,87 @@
     <nav id="sidebar" class="hidden md:block fixed top-0 left-0 h-full w-64 bg-gray-900 border-r border-gray-700 p-5 z-20 overflow-y-auto">
         <h2 class="font-display text-2xl font-bold mb-6 text-red-500 border-b border-red-800 pb-2">Navigation</h2>
         <ul class="space-y-2">
-            <li><a href="#overview" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Overview</a></li>
-            <li><a href="#beat1" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Beat 1: Wary Outpost</a></li>
-            <li><a href="#beat2" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Beat 2: Trail of Treats</a></li>
-            <li><a href="#beat3" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Beat 3: Grim Welcome</a></li>
-            <li><a href="#intermission" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Intermission: Dream</a></li>
-            <li><a href="#beat4" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Beat 4: Shadow of the Tree</a></li>
-            <li><a href="#beat5" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Beat 5: Painted Council</a></li>
-            <li><a href="#beat6" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Beat 6: A Bloody Toll</a></li>
-            <li><a href="#beat7" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Beat 7: Chittering Heart</a></li>
-            <li><a href="#adversaries" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Adversaries & Rewards</a></li>
+            <li><a href="#welcome" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Welcome</a></li>
+            <li><a href="#setting" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">The Setting</a></li>
+            <li><a href="#threat" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">The Threat</a></li>
+            <li><a href="#developments" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Recent Developments</a></li>
+            <li><a href="#summary" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Adventure Summary</a></li>
+            <li><a href="#hooks" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Adventure Hooks</a></li>
+            <li><a href="#beats" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Adventure Beats</a></li>
         </ul>
     </nav>
 
     <!-- Main Content -->
     <main id="main-content" class="md:ml-64 p-4 sm:p-6 md:p-10">
-        <header class="text-center mb-12">
+        <header id="welcome" class="text-center mb-12 scroll-mt-20">
             <h1 class="font-display text-5xl md:text-6xl font-bold text-red-600 tracking-wider">The Curse of the Hollowshade Hill</h1>
-            <p class="mt-4 text-lg text-gray-400 italic">An Interactive Adventure Guide</p>
-        </header>
-        
-        <div class="my-8 rounded-lg overflow-hidden shadow-lg border border-red-800 max-w-4xl mx-auto">
-            <img src="https://i.imgur.com/vQ5aVzU.jpeg" alt="A dark, swampy forest under a foreboding sky, hinting at the macabre themes of the adventure." class="w-full h-auto object-cover">
-        </div>
-
-        <!-- Overview Section -->
-        <section id="overview" class="mb-12 p-6 bg-gray-800/50 rounded-lg border border-gray-700 scroll-mt-20">
-            <h2 class="font-display text-3xl font-bold mb-4 text-red-500">Overview</h2>
-            <p class="text-lg italic text-gray-300 mb-6">"A group of heroes on an urgent mission must detour through a cursed swamp, only to discover that the local legends of cruel witches hide a terrifying and ancient evil that is about to break free."</p>
-            <h3 class="font-display text-2xl font-bold mb-4 text-red-500">Adventure At-a-Glance</h3>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left table-auto">
-                    <thead class="bg-gray-900/50 text-gray-300">
-                        <tr>
-                            <th class="p-3 font-semibold">Beat</th>
-                            <th class="p-3 font-semibold">Est. Time</th>
-                            <th class="p-3 font-semibold">Key Events</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-700">
-                        <tr class="table-row-link cursor-pointer" onclick="document.getElementById('beat1').scrollIntoView();">
-                            <td class="p-3 font-semibold">1: The Wary Outpost</td><td class="p-3">30 Mins</td><td class="p-3">Arrive, learn unsettling rumors about Hollowshade.</td>
-                        </tr>
-                        <tr class="table-row-link cursor-pointer" onclick="document.getElementById('beat2').scrollIntoView();">
-                            <td class="p-3 font-semibold">2: The Trail of Treats</td><td class="p-3">30 Mins</td><td class="p-3">Encounter children and the witches' macabre "gifts."</td>
-                        </tr>
-                        <tr class="table-row-link cursor-pointer" onclick="document.getElementById('beat3').scrollIntoView();">
-                            <td class="p-3 font-semibold">3: The Grim Welcome</td><td class="p-3">45 Mins</td><td class="p-3">Reach a Hollowshade village; meet the Ealdorman.</td>
-                        </tr>
-                        <tr class="table-row-link cursor-pointer" onclick="document.getElementById('intermission').scrollIntoView();">
-                            <td class="p-3 font-semibold">Intermission: Dream</td><td class="p-3">5 Mins</td><td class="p-3">A shared, prophetic dream of the evil heart.</td>
-                        </tr>
-                         <tr class="table-row-link cursor-pointer" onclick="document.getElementById('beat4').scrollIntoView();">
-                            <td class="p-3 font-semibold">4: Shadow of the Tree</td><td class="p-3">60 Mins</td><td class="p-3">Investigate the tree, find the shield, battle beasts.</td>
-                        </tr>
-                         <tr class="table-row-link cursor-pointer" onclick="document.getElementById('beat5').scrollIntoView();">
-                            <td class="p-3 font-semibold">5: A Painted Council</td><td class="p-3">45 Mins</td><td class="p-3">Seek the witches' aid and learn their price.</td>
-                        </tr>
-                         <tr class="table-row-link cursor-pointer" onclick="document.getElementById('beat6').scrollIntoView();">
-                            <td class="p-3 font-semibold">6: A Bloody Toll</td><td class="p-3">30 Mins</td><td class="p-3">Witness the sacrifice and see the witches' true forms.</td>
-                        </tr>
-                         <tr class="table-row-link cursor-pointer" onclick="document.getElementById('beat7').scrollIntoView();">
-                            <td class="p-3 font-semibold">7: The Chittering Heart</td><td class="p-3">60 Mins</td><td class="p-3">Confront the curse and decide Hollowshade's fate.</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="max-w-3xl mx-auto">
+                <p class="mt-4 text-lg text-gray-300">
+                    Welcome to a land drowning in rot and superstition. This Daggerheart one-shot, designed for five Tier 2, Level 2 characters, plunges the heroes into a cursed swamp where ancient evils stir. They will navigate a gauntlet of macabre folklore, monstrous spiders, and manipulative crones to confront a horror festering in the dark. This adventure is a tense crawl through a dying land, where heroism is measured by the grim choices made when all options seem bleak. Prepare for a tale of heroic fantasy steeped in horror.
+                </p>
             </div>
+             <img src="https://i.imgur.com/vQ5aVzU.jpeg" alt="A twisted, nightmarish tree on a hill overlooking a dark swamp, with the silhouettes of five adventurers in the foreground." class="mt-8 mx-auto rounded-lg shadow-lg border-2 border-red-900/50 w-full max-w-4xl">
+        </header>
+
+        <section id="setting" class="mb-12 p-6 bg-gray-800/50 rounded-lg border border-gray-700 scroll-mt-20">
+            <h2 class="font-display text-3xl font-bold mb-4 text-red-500">The Setting</h2>
+            <p class="text-gray-300">Hollowshade is a vast, swampy mangrove forest that swallowed an ancient battlefield whole. Constant rains and a diverted river turned the war-torn land into a stagnant mire dotted with tiny, isolated villages. At its heart looms Hollowshade Hill, the centerpiece of the region's dark legends. It is said that atop this hill, a coven of witches known as the "Ladies of the Forest" defeated and imprisoned a powerful druid. From this prison, a monstrous, gnarled tree sprouted, growing so vast its blood-red leaves cast the entire hill in perpetual shadow. The locals believe the witches rule this domain, keeping the worst of its evils in check. If only that were true.</p>
         </section>
 
-        <!-- Adventure Beats -->
-        <div class="space-y-8">
-            <section id="beat1" class="scroll-mt-20"><details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 1: The Wary Outpost</summary><div class="p-6 border-t border-gray-700 space-y-4"><!-- Beat Content --></div></details></section>
-            <section id="beat2" class="scroll-mt-20"><details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 2: The Trail of Treats</summary><div class="p-6 border-t border-gray-700 space-y-4"><!-- Beat Content --></div></details></section>
-            <section id="beat3" class="scroll-mt-20"><details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 3: The Grim Welcome</summary><div class="p-6 border-t border-gray-700 space-y-4"><!-- Beat Content --></div></details></section>
-            <section id="intermission" class="scroll-mt-20"><details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden" open><summary class="font-display text-3xl p-6 font-bold text-red-500">Intermission: A Pounding Dream</summary><div class="p-6 border-t border-gray-700 space-y-4"><!-- Beat Content --></div></details></section>
-            <section id="beat4" class="scroll-mt-20"><details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 4: The Shadow of the Tree</summary><div class="p-6 border-t border-gray-700 space-y-4"><!-- Beat Content --></div></details></section>
-            <section id="beat5" class="scroll-mt-20"><details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 5: A Painted Council</summary><div class="p-6 border-t border-gray-700 space-y-4"><!-- Beat Content --></div></details></section>
-            <section id="beat6" class="scroll-mt-20"><details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 6: A Bloody Toll</summary><div class="p-6 border-t border-gray-700 space-y-4"><!-- Beat Content --></div></details></section>
-            <section id="beat7" class="scroll-mt-20"><details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 7: The Chittering Heart</summary><div class="p-6 border-t border-gray-700 space-y-4"><!-- Beat Content --></div></details></section>
-        </div>
+        <section id="threat" class="mb-12 p-6 bg-gray-800/50 rounded-lg border border-gray-700 scroll-mt-20">
+            <h2 class="font-display text-3xl font-bold mb-4 text-red-500">The Threat</h2>
+            <p class="text-gray-300">An ancient, alien consciousness—a being of parasitic rot and arachnoid hunger—is stirring in its prison beneath Hollowshade Hill. This is the true source of the curse, the druid's prison merely the vessel it has corrupted over centuries. It now influences the swamp's fauna, driving beasts mad and breeding monstrous spiders that serve as its eyes and claws. It whispers in dreams, promising power to the desperate, like the witches who unknowingly draw their strength from its corruption. If it breaks free, its influence will spread like a plague, transforming the entire region into a writhing nest of horrors.</p>
+        </section>
 
-        <!-- Adversaries & Rewards Section -->
-        <section id="adversaries" class="mt-12 p-6 bg-gray-800/50 rounded-lg border border-gray-700 scroll-mt-20">
-            <!-- Content for Adversaries & Rewards -->
+        <section id="developments" class="mb-12 p-6 bg-gray-800/50 rounded-lg border border-gray-700 scroll-mt-20">
+            <h2 class="font-display text-3xl font-bold mb-4 text-red-500">Recent Developments</h2>
+            <p class="text-gray-300">The imprisoned entity's power is growing. Its influence seeps into the swamp, causing the wildlife to become more aggressive and monstrous spiders to wander further from the hill. The "Ladies of the Forest," sensing a shift in the balance of power, have become more active, their demands on the local populace growing crueler as their own tainted magic wavers. They treat Hollowshade as their domain, blind to the fact that they are merely caretakers for a far greater evil—one that now sees them as pests in its own nest.</p>
+        </section>
+
+        <section id="summary" class="mb-12 p-6 bg-gray-800/50 rounded-lg border border-gray-700 scroll-mt-20">
+            <h2 class="font-display text-3xl font-bold mb-4 text-red-500">Adventure Summary</h2>
+            <p class="text-gray-300">Forced by an urgent quest to take the fastest route, a party of five Tier 2, Level 2 heroes must traverse the cursed Hollowshade swamp. They are quickly embroiled in the locals' grim traditions, which are dedicated to the manipulative "Ladies of the Forest." A shared, prophetic nightmare reveals a greater threat: a monstrous, beating heart beneath the gnarled tree on Hollowshade Hill. Tasked by the suspicious village Ealdorman, the heroes investigate the hill, battling frenzied beasts and spider-horrors to uncover the truth. They learn they must bargain with the witches, who demand a bloody price to help them destroy the entity, forcing the heroes into a grim alliance to confront the Chittering Heart and decide the fate of Hollowshade.</p>
+        </section>
+
+        <section id="hooks" class="mb-12 scroll-mt-20">
+            <h2 class="font-display text-3xl font-bold mb-6 text-red-500 text-center">Adventure Hooks</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="p-6 bg-gray-800/50 rounded-lg border border-gray-700">
+                    <h3 class="font-display text-xl font-bold text-red-400 mb-2">1. The Heartseed</h3>
+                    <p>You are entrusted with a faintly glowing seed that is the only cure for a beloved noble, mentor, or family member who is dying from a magical plague. The seed must be planted in a sanctum on the far side of Hollowshade within the week, or it will wither and your charge will die. The path through the swamp is the only one short enough.</p>
+                </div>
+                <div class="p-6 bg-gray-800/50 rounded-lg border border-gray-700">
+                    <h3 class="font-display text-xl font-bold text-red-400 mb-2">2. The Lost Patrol</h3>
+                    <p>A fellow Daggerheart, a friend or rival, led a small patrol into Hollowshade a fortnight ago to investigate strange reports and never returned. You carry a token they gave you. You have tracked them to the edge of the swamp, and now you must venture in to find out what happened and bring them home.</p>
+                </div>
+                <div class="p-6 bg-gray-800/50 rounded-lg border border-gray-700">
+                    <h3 class="font-display text-xl font-bold text-red-400 mb-2">3. The Witch's Debt</h3>
+                    <p>One of your ancestors made a pact with the Ladies of the Forest, and that debt is now due. A spectral messenger has delivered a summons: come to Hollowshade and serve the Ladies, or the ancient curse will fall upon your own family. You do not know the nature of the service, only that to refuse is to invite ruin.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Adventure Beats Section-->
+        <section id="beats" class="scroll-mt-20">
+            <h2 class="font-display text-4xl font-bold mb-8 text-red-500 text-center">Adventure Beats</h2>
+            <div class="space-y-8">
+                <!-- BEAT 1 -->
+                <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 1: The Wary Outpost</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat1_content"></div></details>
+                <!-- BEAT 2 -->
+                <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 2: The Trail of Treats</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat2_content"></div></details>
+                <!-- BEAT 3 -->
+                <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 3: The Grim Welcome</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat3_content"></div></details>
+                <!-- INTERMISSION -->
+                <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden" open><summary class="font-display text-3xl p-6 font-bold text-red-500">Intermission: A Pounding Dream</summary><div class="p-6 border-t border-gray-700 space-y-4" id="intermission_content"></div></details>
+                <!-- BEAT 4 -->
+                <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 4: The Shadow of the Tree</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat4_content"></div></details>
+                <!-- BEAT 5 -->
+                <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 5: A Painted Council</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat5_content"></div></details>
+                <!-- BEAT 6 -->
+                <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 6: A Bloody Toll</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat6_content"></div></details>
+                <!-- BEAT 7 -->
+                <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 7: The Chittering Heart</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat7_content"></div></details>
+            </div>
         </section>
 
     </main>
@@ -183,181 +181,147 @@
 
     <script>
         const adversaryData = {
-            direWolf: { name: 'Dire Wolf', source: 'Tier 1 Skulk, SRD p. 76', difficulty: 12, thresholds: '5 / 9', hp: 4, stress: 3, atk: '+2 Claws: Melee | 1d6+2 phy', experience: 'Keen Senses +3', features: [{ name: 'Pack Tactics (Passive)', text: 'If the Wolf makes a successful attack and another Dire Wolf is within Melee range of the target, deal 1d6+5 physical damage instead and you gain a Fear.' }, { name: 'Hobbling Strike (Action)', text: 'Mark a Stress to make an attack against a target within Melee range. On a success, deal 3d4+10 direct physical damage and make them Vulnerable until they clear at least 1 HP.' }] },
-            mireGhouls: { name: 'Mire Ghouls', source: 'Zombie Pack stat block, Tier 1 Horde, SRD p. 83', difficulty: 8, thresholds: '6 / 12', hp: 6, stress: 3, atk: '-1 Bite: Melee | 1d10+2 phy', experience: 'N/A', features: [{ name: 'Horde (1d4+2) (Passive)', text: 'When the Ghouls have marked half or more of their HP, their standard attack deals 1d4+2 physical damage instead.' }, { name: 'Overwhelm (Reaction)', text: 'When the Ghouls mark HP from an attack within Melee range, you can mark a Stress to make a standard attack against the attacker.' }] },
-            webPhantom: { name: 'Web Phantom', source: 'Stonewraith stat block, Tier 2 Skulk, SRD p. 90', difficulty: 13, thresholds: '11 / 22', hp: 6, stress: 3, atk: '+3 Bite and Claws: Melee | 2d8+6 phy', experience: 'Stonesense +3', features: [{ name: 'Web Walker (Passive)', text: 'The Web Phantom can move through stone and earth as easily as air. While within webbing, they are Hidden and immune to all damage.' }, { name: 'Rocky Ambush (Action)', text: 'While Hidden, mark a Stress to leap into Melee range with a target. The target must succeed on an Agility or Instinct Reaction Roll (15) or take 2d8 physical damage and become temporarily Restrained.' }, { name: 'Momentum (Reaction)', text: 'When the Stonewraith makes a successful attack against a PC, you gain a Fear.' }] },
-            hollowshadeMauler: { name: 'Hollowshade Mauler', source: 'Minotaur Wrecker stat block, Tier 2 Bruiser, SRD p. 88', difficulty: 16, thresholds: '14 / 27', hp: 7, stress: 5, atk: '-2 Vicious Mandibles: Very Close | 2d8+5 phy', experience: 'Navigation +2', features: [{ name: 'Ramp Up (Passive)', text: 'You must spend a Fear to spotlight the Mauler. While spotlighted, they can make their standard attack against all targets within range.' }, { name: 'Charging Bull (Action)', text: 'Mark a Stress to charge through a group within Close range and make an attack against all targets in its path. Targets the Mauler succeeds against take 2d6+8 physical damage and are knocked back to Far range.' }, { name: 'Gore (Action)', text: 'Make an attack against a target within Very Close range, moving into Melee range of them. On a success, deal 2d8 direct physical damage.' }] },
-            spiderHatchlings: { name: 'Spider Hatchlings', source: 'Swarm of Rats stat block, Tier 1 Horde, SRD p. 82', difficulty: 10, thresholds: '6 / 10', hp: 6, stress: 2, atk: '-3 Claws: Melee | 1d8+2 phy', experience: 'N/A', features: [{ name: 'Horde (1d4+1) (Passive)', text: 'When the Swarm has marked half or more of their HP, their standard attack deals 1d4+1 physical damage instead.' }, { name: 'In Your Face (Passive)', text: 'All targets within Melee range have disadvantage on attacks against targets other than the Swarm.' }] },
-            chitteringHeart: { name: 'The Chittering Heart', source: 'Gorgon stat block, Tier 2 Solo, SRD p. 88', difficulty: 15, thresholds: '13 / 25', hp: 9, stress: 3, atk: '+4 Venom Spit: Far | 2d20+3 mag', experience: 'Stealth +3', features: [{ name: 'Relentless (2) (Passive)', text: 'The Heart can be spotlighted up to two times per GM turn. Spend Fear as usual.' }, { name: 'Skittering Limbs (Action)', text: 'Make an attack against a target within Melee range. On a success, mark a Stress to deal 2d10+4 physical damage and the target must mark a Stress.' }, { name: 'Maddening Drone (Reaction)', text: 'When the Heart takes damage from an attack within Close range, spend a Fear to force the attacker to make an Instinct Reaction Roll (DC 15). On a failure, they mark 1 HP from psychic feedback and become temporarily Vulnerable.' }] }
+            direWolf: { name: 'Dire Wolf', source: 'Tier 1 Skulk', difficulty: 12, thresholds: '5 / 9', hp: 4, stress: 3, atk: '+2 Claws (Melee)', damage: '1d6+2 phy', experience: 'Keen Senses +3', features: [{ name: 'Pack Tactics (Passive)', text: 'If the Wolf makes a successful attack and another Dire Wolf is within Melee range of the target, deal 1d6+5 physical damage instead and you gain a Fear.' }, { name: 'Hobbling Strike (Action)', text: 'Mark a Stress to make an attack against a target within Melee range. On a success, deal 3d4+10 direct physical damage and make them <i>Vulnerable</i> until they clear at least 1 HP.' }] },
+            webPhantom: { name: 'Web Phantom', source: 'Tier 2 Skulk', difficulty: 13, thresholds: '11 / 22', hp: 6, stress: 3, atk: '+3 Bite and Claws (Melee)', damage: '2d8+6 phy', experience: 'Ambusher +2', features: [{ name: 'Webstrider (Passive)', text: 'The Web Phantom can move through dense webbing and soft earth as easily as air. While fully within webbing, they are <i>Hidden</i> and immune to damage.' }, { name: 'Rocky Ambush (Action)', text: 'While <i>Hidden</i>, mark a Stress to leap into Melee range with a target. The target must succeed on an Agility or Instinct Reaction Roll (15) or take 2d8 physical damage and become temporarily <i>Restrained</i>.' }, { name: 'Momentum (Reaction)', text: 'When the Web Phantom makes a successful attack against a PC, you gain a Fear.' }] },
+            spiderHatchlings: { name: 'Spider Hatchlings', source: 'Tier 1 Horde', difficulty: 10, thresholds: '6 / 10', hp: 6, stress: 2, atk: '-3 Claws (Melee)', damage: '1d8+2 phy', experience: 'N/A', features: [{ name: 'Horde (1d4+1) (Passive)', text: 'When the Swarm has marked half or more of their HP, their standard attack deals 1d4+1 physical damage instead.' }, { name: 'In Your Face (Passive)', text: 'All targets within Melee range have disadvantage on attacks against targets other than the Swarm.' }] },
+            mireGhouls: { name: 'Mire Ghouls', source: 'Tier 1 Horde', difficulty: 8, thresholds: '6 / 12', hp: 6, stress: 3, atk: '-1 Bite (Melee)', damage: '1d10+2 phy', experience: 'N/A', features: [{ name: 'Horde (1d4+2) (Passive)', text: 'When the Ghouls have marked half or more of their HP, their standard attack deals 1d4+2 physical damage instead.' }, { name: 'Overwhelm (Reaction)', text: 'When the Ghouls mark HP from an attack within Melee range, you can mark a Stress to make a standard attack against the attacker.' }] },
+            chitteringHeart: { name: 'The Chittering Heart', source: 'Tier 2 Solo', difficulty: 15, thresholds: '13 / 25', hp: 9, stress: 3, atk: '+4 Venom Spit (Far)', damage: '2d20+3 mag', experience: 'Stealth +3', features: [{ name: 'Relentless (2) (Passive)', text: 'The Heart can be spotlighted up to two times per GM turn. Spend Fear as usual.' }, { name: 'Skittering Limbs (Action)', text: 'Make an attack against a target within Melee range. On a success, mark a Stress to deal 2d10+4 physical damage and the target must mark a Stress.' }, { name: 'Maddening Drone (Reaction)', text: 'When the Heart takes damage from an attack within Close range, spend a Fear to force the attacker to make an Instinct Reaction Roll (DC 15). On a failure, they mark 1 HP from psychic feedback and become temporarily <i>Vulnerable</i>.' }] },
+            hollowshadeMauler: { name: 'Hollowshade Mauler', source: 'Tier 2 Bruiser', difficulty: 16, thresholds: '14 / 27', hp: 7, stress: 5, atk: '+2 Vicious Mandibles (Very Close)', damage: '2d8+5 phy', experience: 'Navigation +2', features: [{ name: 'Ramp Up (Passive)', text: 'You must spend a Fear to spotlight the Mauler. While spotlighted, they can make their standard attack against all targets within range.' }, { name: 'Charging Bull (Action)', text: 'Mark a Stress to charge through a group within Close range and make an attack against all targets in its path. Targets the Mauler succeeds against take 2d6+8 physical damage and are knocked back to Far range.' }, { name: 'Gore (Action)', text: 'Make an attack against a target within Very Close range, moving into Melee range of them. On a success, deal 2d8 direct physical damage.' }] }
         };
 
         const modal = document.getElementById('adversaryModal');
         const modalContent = document.getElementById('modalContent');
         
         function populateContent() {
-            document.querySelector('#beat1 > details > div').innerHTML = `
+            document.getElementById('beat1_content').innerHTML = `
                 <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
                 <p>The adventure begins in Mire's End, a remote village far from Hollowshade. The party is on an urgent quest, carrying a <strong>Heartseed</strong>—a faintly glowing magical seed that must be planted in a sanctum beyond the forest to save a dying noble. The perilous path through Hollowshade is the only one fast enough.</p>
-                <blockquote class="read-aloud p-4">The track dissolves into a muddy street that cuts through a collection of sagging, moss-covered buildings. This must be Mire's End. A perpetual drizzle falls from a grey sky, and the air hangs thick with the smell of wet earth and woodsmoke. A single tavern, its sign depicting a boot half-sunk in mud, offers the only sign of welcome. You clutch the pouch containing the Heartseed; you can feel its faint, desperate pulse against your palm. Time is running out.</blockquote>
-                <h4 class="font-display text-xl font-bold text-red-400 mt-4">GM Notes</h4>
+                <blockquote class="read-aloud p-4 my-4">The track dissolves into a muddy street that cuts through a collection of sagging, moss-covered buildings. This must be Mire's End. A perpetual drizzle falls from a grey sky, and the air hangs thick with the smell of wet earth and woodsmoke. A single tavern, its sign depicting a boot half-sunk in mud, offers the only sign of welcome. You clutch the pouch containing the Heartseed; you can feel its faint, desperate pulse against your palm. Time is running out.</blockquote>
+                <h4 class="font-display text-xl font-bold text-red-400">Social</h4>
+                <p>This is a social encounter. Key NPCs include Silas, a grizzled trapper, and various nervous merchants and locals in the tavern. The goal is to gather information about the dangers of Hollowshade.</p>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Features of the Area</h4>
                 <ul class="list-disc list-inside space-y-2">
-                    <li><strong>Stakes:</strong> The noble's life depends on the party delivering the Heartseed in time. Delaying means death.</li>
-                    <li><strong>Clues:</strong>
-                        <ul class="list-circle list-inside ml-4">
-                            <li>The villagers of Hollowshade are a "hardened and weird bunch," who offer prayers to witches they call the "Ladies of the Forest."</li>
-                            <li>A trapper named Silas says, "Complete and utter nonsense. Just old crones in the wood. It's the *spiders* you need to worry about."</li>
-                        </ul>
-                    </li>
-                    <li><strong>Checks:</strong>
-                        <ul class="list-circle list-inside ml-4">
-                            <li><strong>Presence (Charm) check (DC 14):</strong> To coax stories from the tight-lipped locals.</li>
-                            <li><strong>Knowledge (Recall) check (DC 14):</strong> To see if any character has read of the "Ladies of the Forest" in regional folklore.</li>
-                        </ul>
-                    </li>
+                    <li><strong>Illumination:</strong> Grey, overcast daylight. The tavern interior is dimly lit by a single hearth and a few tallow candles.</li>
+                    <li><strong>Roads/Paths:</strong> A single muddy main street.</li>
+                    <li><strong>Foliage/Obscurement:</strong> The village is surrounded by a dreary, sparse woodland that gives way to the swamp.</li>
+                    <li><strong>Treasure:</strong> No treasure is found in this beat.</li>
                 </ul>
             `;
-            document.querySelector('#beat2 > details > div').innerHTML = `
+            document.getElementById('beat2_content').innerHTML = `
                 <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
                 <p>Leaving Mire's End, the party enters the cursed lands of Hollowshade. The path is a muddy track cutting through dark, gnarled mangrove-like trees. The colossal, blood-leafed tree on the distant hill is now visible.</p>
-                <blockquote class="read-aloud p-4">The air grows still and heavy, thick with the scent of decay and damp earth. The trees here are twisted and menacing. Ahead, two small figures, a boy and a slightly older girl, trudge down the muddy path. The girl clutches a small, empty wooden pail.</blockquote>
-                <h4 class="font-display text-xl font-bold text-red-400 mt-4">GM Notes</h4>
+                <blockquote class="read-aloud p-4 my-4">The air grows still and heavy, thick with the scent of decay and damp earth. The trees here are twisted and menacing. Ahead, two small figures, a boy and a slightly older girl, trudge down the muddy path. The girl clutches a small, empty wooden pail.</blockquote>
+                <h4 class="font-display text-xl font-bold text-red-400">Social</h4>
+                <p>This is a social encounter with two children, Elspeth (8) and Finn (6). Their story reveals the grim traditions of the Hollowshade villages and the influence of the "Ladies of the Forest."</p>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Features of the Area</h4>
                 <ul class="list-disc list-inside space-y-2">
-                    <li><strong>Stakes:</strong> The safety of the two children, Elspeth (8) and Finn (6). Their story reveals the desperation of the Hollowshade folk.</li>
-                    <li><strong>Dialogue & Clues:</strong>
-                        <ul class="list-circle list-inside ml-4">
-                            <li>Elspeth: *"I spilled the milk. All of it. Papa got... quiet. He told Mama the Ladies would provide. He sent us on the Trail of Treats."*</li>
-                            <li>Further on, the trail is lined with crude gingerbread men and candies stuck to trees.</li>
-                            <li><strong>The Reveal:</strong> If a character interacts with a treat, it dissolves into a writhing fistful of maggots. An <strong>Instinct (Sense) check (DC 14)</strong> might reveal the foul magic before touching one.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Motivation:</strong> The children mention they are from Weavers' Dell, giving the party a reason to press on and ensure they get home safe.</li>
+                    <li><strong>Illumination:</strong> Dim light, heavily obscured by the thick canopy of the swamp.</li>
+                    <li><strong>Roads/Paths:</strong> A muddy, treacherous track that is difficult terrain.</li>
+                    <li><strong>Foliage/Obscurement:</strong> Gnarled mangrove-like trees and thick undergrowth provide heavy cover.</li>
+                    <li><strong>Water/Swamp:</strong> The path is surrounded by stagnant, black water.</li>
                 </ul>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Treasure & Project Ideas</h4>
+                <p>The "treats" are magical illusions that dissolve into maggots and are not treasure.</p>
             `;
-            document.querySelector('#beat3 > details > div').innerHTML = `
+            document.getElementById('beat3_content').innerHTML = `
                 <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
                 <p>The party arrives at Weavers' Dell, a small, grim village of four or five houses built on stilts above the mangrove swamp. A single longhouse serves as a guest house, available for one handful of gold and an hour spent mending fishing nets.</p>
-                <blockquote class="read-aloud p-4">You follow the children to Weavers' Dell, a cluster of wooden homes perched on stilts above the black water. The place is eerily quiet, the only sounds the lapping of water and the incessant buzzing of flies. An old man, his face a roadmap of worry, sits on a porch mending a net. He watches your approach with tired, hollow eyes.</blockquote>
-                <h4 class="font-display text-xl font-bold text-red-400 mt-4">GM Notes</h4>
+                <blockquote class="read-aloud p-4 my-4">You follow the children to Weavers' Dell, a cluster of wooden homes perched on stilts above the black water. The place is eerily quiet, the only sounds the lapping of water and the incessant buzzing of flies. An old man, his face a roadmap of worry, sits on a porch mending a net. He watches your approach with tired, hollow eyes.</blockquote>
+                <h4 class="font-display text-xl font-bold text-red-400">Social</h4>
+                <p>This social encounter involves interacting with the deeply suspicious and fearful villagers of Weavers' Dell, culminating in a conversation with a village elder who points them toward the Ealdorman, Kaelen.</p>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Features of the Area</h4>
                 <ul class="list-disc list-inside space-y-2">
-                    <li><strong>Stakes:</strong> The party needs rest, but must engage with these desperate and suspicious people.</li>
-                    <li><strong>Social Encounter:</strong> During the communal evening meal, the elder laments their situation: wolves scare off game, cows give sour milk, dogs bark all night, and bandits beset the paths. His only solution is to pray to the Ladies of the Forest.</li>
-                    <li><strong>Clue:</strong> If asked for a better solution, the elder shakes his head. "For such matters, you must speak to the Ealdorman. Kaelen. He's our tanner. He understands the old ways... and the price."</li>
-                    <li><strong>Checks:</strong>
-                        <ul class="list-circle list-inside ml-4">
-                            <li><strong>Presence (Charm) check (DC 14):</strong> To build rapport with the wary villagers.</li>
-                            <li><strong>Instinct (Sense) check (DC 14):</strong> To gauge the elder's sincerity and the depth of the village's fear.</li>
-                        </ul>
-                    </li>
+                    <li><strong>Illumination:</strong> Dim light beneath the swamp canopy.</li>
+                    <li><strong>Structures:</strong> Four or five wooden houses and a longhouse, all on stilts. Rickety boardwalks connect them.</li>
+                    <li><strong>Water/Swamp:</strong> The entire village is built over the black, murky water of the swamp.</li>
                 </ul>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Treasure & Project Ideas</h4>
+                <p>No treasure is found in this beat.</p>
             `;
-            document.querySelector('#intermission > details > div').innerHTML = `
+            document.getElementById('intermission_content').innerHTML = `
                 <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
                 <p>This event occurs when the party rests in Weavers' Dell. It is a shared nightmare.</p>
-                <blockquote class="read-aloud p-4">Sleep does not bring rest. You stand together in a field of grey, dead grass under a bruised-purple sky. A sickly full moon hangs overhead, and in the distance, the colossal tree from the hill claws at the sky, its leaves the color of dried blood. A sound, a feeling more than a sound, fills you: a slow, rhythmic *thump-thump... thump-thump...* like a monstrous heart beating deep within the earth. Then, a voice echoes in your minds—a desperate, fractured whisper. *"Free me... please... free me..."*</blockquote>
-                <h4 class="font-display text-xl font-bold text-red-400 mt-4">GM Notes</h4>
-                <p>Upon waking, a <strong>Knowledge (Recall) check (DC 15)</strong> confirms the tree from the dream matches the legends of the one on Hollowshade Hill, said to be a druid's prison.</p>
+                <blockquote class="read-aloud p-4 my-4">Sleep does not bring rest. You stand together in a field of grey, dead grass under a bruised-purple sky. A sickly full moon hangs overhead, and in the distance, the colossal tree from the hill claws at the sky, its leaves the color of dried blood. A sound, a feeling more than a sound, fills you: a slow, rhythmic <i>thump-thump... thump-thump...</i> like a monstrous heart beating deep within the earth. Then, a voice echoes in your minds—a desperate, fractured whisper. <i>"Free me... please... free me..."</i></blockquote>
+                <p class="mt-4">Upon waking, a <strong>Knowledge (Recall) check (DC 15)</strong> confirms the tree from the dream matches the legends of the one on Hollowshade Hill, said to be a druid's prison.</p>
             `;
-            document.querySelector('#beat4 > details > div').innerHTML = `
+            document.getElementById('beat4_content').innerHTML = `
                 <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
-                <p>Ealdorman Kaelen, the village tanner, asks the party to investigate the hill before seeking the "Ladies." He wants proof of the threat.</p>
-                <blockquote class="read-aloud p-4">The base of Hollowshade Hill is a nightmare of grasping roots and thick webs. The great tree looms above, its blood-dark leaves blotting out the sky. The air is cold and vibrates with a low thrumming you feel in your bones—the same pounding beat from your dream.</blockquote>
-                <h4 class="font-display text-xl font-bold text-red-400 mt-4">GM Notes</h4>
+                <p>Ealdorman Kaelen, the village tanner, asks the party to investigate the hill before seeking the "Ladies." He wants proof of the threat. The encounter features an ambush by 5x <button class="text-red-400 hover:underline" onclick="showModal('direWolf')">Dire Wolves</button> outside the tree's cavern, and 3x <button class="text-red-400 hover:underline" onclick="showModal('webPhantom')">Web Phantoms</button> inside.</p>
+                <blockquote class="read-aloud p-4 my-4">The base of Hollowshade Hill is a nightmare of grasping roots and thick webs. The great tree looms above, its blood-dark leaves blotting out the sky. The air is cold and vibrates with a low thrumming you feel in your bones—the same pounding beat from your dream.</blockquote>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Map</h4>
+                <p>The area at the base of the hill is a circular clearing, 50 feet in diameter, choked with thick roots (difficult terrain). The concealed hole to the cavern is in the center. The surrounding swamp trees provide cover for the wolves to ambush from. The cavern inside is a single 40-foot circular chamber with a 10-foot deep pool of water on one side.</p>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Tactics</h4>
                 <ul class="list-disc list-inside space-y-2">
-                    <li><strong>Stakes:</strong> Survive the hill's guardians and find proof for the Ealdorman.</li>
-                    <li><strong>Combat 1 (Outside):</strong> Ambush by 5x <button class="text-red-400 hover:underline" onclick="showModal('direWolf')">Dire Wolves</button>.</li>
-                    <li><strong>Discovery:</strong> An <strong>Instinct (Perceive) check (DC 15)</strong> reveals a concealed hole near the tree's base.</li>
-                    <li><strong>Combat 2 (Inside):</strong> The dark cavern contains a massive, pulsating seed protected by a green shield, guarded by 3x <button class="text-red-400 hover:underline" onclick="showModal('webPhantom')">Web Phantoms</button>.</li>
-                    <li class="mechanic-box p-3 rounded"><strong>Dynamic Consequence Countdown (6): The Heart Awakens.</strong> Ticks down on Fear rolls. Each tick forces a Stress mark. At 0, summons 1d4+1 <button class="text-red-400 hover:underline" onclick="showModal('spiderHatchlings')">Spider Hatchlings</button>.</li>
-                    <li><strong>Exit:</strong> A deep pool of water is the only other exit. An <strong>Instinct (Navigate) check (DC 14)</strong> confirms it leads to an underwater river.</li>
+                    <li><strong>Dire Wolves:</strong> The wolves use pack tactics, attempting to surround a single character to gain the benefit of their passive ability. They will use their Hobbling Strike on heavily armored characters to make them vulnerable for the rest of the pack.</li>
+                    <li><strong>Web Phantoms:</strong> These creatures are intelligent. They will remain hidden within the thick webbing on the ceiling of the cavern, using their Webstrider ability. They will wait for the party to be distracted by the pulsating heart before dropping down to ambush spellcasters or ranged characters, using their Rocky Ambush to restrain and isolate a target.</li>
                 </ul>
-            `;
-            document.querySelector('#beat5 > details > div').innerHTML = `
-                <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
-                <p>Kaelen, convinced, sends the party to the witches. His daughter Lena guides them to the Trail of Treats, which magically reveals itself to her before she returns home.</p>
-                <blockquote class="read-aloud p-4">The path of treats is even more unsettling this time... As you follow its winding path deeper into the mangrove swamp, the dark water beside the path begins to bubble. Filthy, waterlogged shapes claw their way from the muck—bodies in a state of advanced decay, their eyes burning with a cold, dead light.</blockquote>
-                <h4 class="font-display text-xl font-bold text-red-400 mt-4">GM Notes</h4>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Features of the Area</h4>
                 <ul class="list-disc list-inside space-y-2">
-                    <li><strong>Travel Combat:</strong> Attacked by <button class="text-red-400 hover:underline" onclick="showModal('mireGhouls')">Mire Ghouls</button>. This is a resource drain, not a deadly fight.</li>
-                    <li><strong>The Sanctum:</strong> The trail ends at two shacks on a muddy island. One houses terrified children cared for by Agnes; the other is an altar room.</li>
-                    <li><strong>The Altar Room:</strong> Contains a stone altar and a painting of three beautiful women dancing around a cauldron. When the party enters, candles burst into green flame.</li>
-                    <li><strong>Social Encounter:</strong> The figures in the painting speak. They are the Ladies of the Forest, cruel and demanding. They agree to lower the shield but demand a price. A curved, obsidian knife materializes. "The Ealdorman knows the price. Bring us what is owed."</li>
-                    <li><strong>Checks:</strong>
-                        <ul class="list-circle list-inside ml-4">
-                            <li><strong>Instinct (Sense) check (DC 14):</strong> To notice the unnatural docility of the children.</li>
-                            <li><strong>Presence (Charm) check (DC 15):</strong> To reason with the witches (they won't budge, but might offer a cryptic clue).</li>
-                        </ul>
-                    </li>
-                     <li><strong>Escalations (Fear Spends):</strong> Spend 1 Fear: The witches command Agnes, "Get that knife, woman!" She drops it, and their shriek of rage makes everyone mark a Stress.</li>
+                    <li><strong>Illumination:</strong> Outside, dim light due to the tree's shadow. Inside the cavern, there is no light source; it is pitch black.</li>
+                    <li><strong>Foliage/Obscurement:</strong> Thick, gnarled roots provide half-cover throughout the area.</li>
+                    <li><strong>Webs/Entanglements:</strong> The entire area is covered in thick webs, acting as difficult terrain.</li>
                 </ul>
-            `;
-            document.querySelector('#beat6 > details > div').innerHTML = `
-                <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
-                <p>The party returns to Kaelen with the knife. He leads them to his tannery.</p>
-                <blockquote class="read-aloud p-4">Kaelen takes the obsidian knife... with a swift, brutal motion, slices off his own left ear, catching it and the gush of blood in the bowl. He pushes it towards you... "This is the price of their protection," he grits out. "Now go. Finish this."</blockquote>
-                <blockquote class="read-aloud p-4 mt-4">You return to the witches' sanctum... the painting of the three beautiful women ripples... they step out of the frame... Their beauty sloughs away, revealing their true forms: hideous, twisted crones... "The bargain is struck," she rasps. "The shield on the hill is gone. Go now. Destroy the heart of that place. End the threat to *our* domain." With that, they dissolve into a foul-smelling fog...</blockquote>
-                <h4 class="font-display text-xl font-bold text-red-400 mt-4">GM Notes</h4>
-                <ul class="list-disc list-inside space-y-2">
-                     <li><strong>Stakes:</strong> Witnessing the true, bloody cost of the witches' power. The party are now instruments of their will.</li>
-                     <li><strong>Checks:</strong>
-                        <ul class="list-circle list-inside ml-4">
-                            <li><strong>Presence (Intimidate) check (DC 17):</strong> To try to stop Kaelen (he will not be swayed).</li>
-                            <li><strong>Instinct (Sense) check (DC 16):</strong> To feel the ancient, corrupt power of the witches as they reveal their true forms.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Escalations (Fear Spends):</strong> Spend 1 Fear: When the witches manifest, the air grows deathly cold and all the children in the other shack begin to wail in terror.</li>
-                </ul>
-            `;
-            document.querySelector('#beat7 > details > div').innerHTML = `
-                <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
-                <p>The party returns to Hollowshade Hill. The green shield is gone. The hole is now an open maw. The pounding from below is frantic.</p>
-                <blockquote class="read-aloud p-4">You drop into the cavern once more. The green shield is gone. You stand before the Chittering Heart, a grotesque fusion of man, wood, and arachnid horror... It is the druid from the legends, his body a nightmare prison for something far worse. As it senses you, a dozen red eyes on its bloated thorax snap open, and a sound like a million spiders chittering in unison fills your mind.</blockquote>
-                <h4 class="font-display text-xl font-bold text-red-400 mt-4">GM Notes</h4>
-                 <ul class="list-disc list-inside space-y-2">
-                    <li><strong>Stakes:</strong> The fate of Hollowshade. Destroy the heart and empower the witches, or leave it and let two evils war for control.</li>
-                    <li><strong>Final Boss:</strong> <button class="text-red-400 hover:underline" onclick="showModal('chitteringHeart')">The Chittering Heart</button>.</li>
-                    <li><strong>Encounter Mechanics:</strong>
-                        <ul class="list-circle list-inside ml-4">
-                            <li><strong>Lashing Roots:</strong> Spend 1 Fear. All PCs make an Agility (Maneuver) Reaction Roll (DC 15) or become Restrained.</li>
-                            <li><strong>Hatchlings:</strong> After the boss takes Severe damage, it shrieks and 1d4+1 <button class="text-red-400 hover:underline" onclick="showModal('spiderHatchlings')">Spider Hatchlings</button> burst from egg-sacs.</li>
-                        </ul>
-                    </li>
-                    <li><strong>The Choice:</strong> When the boss is defeated, it leaves behind a pulsating, black seed-heart. The witches command the party to destroy it; the druid's spirit whispers for them to let it be, to keep the witches in check. The choice has permanent consequences.</li>
-                 </ul>
-            `;
-            document.querySelector('#adversaries').innerHTML = `
-                <h2 class="font-display text-3xl font-bold mb-6 text-red-500">Adversaries & Rewards</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h3 class="font-display text-2xl font-bold mb-4 text-red-400">Adversaries</h3>
-                        <ul class="space-y-2">
-                            <li><button class="text-red-400 hover:underline" onclick="showModal('direWolf')">Dire Wolf</button> (Tier 1 Skulk)</li>
-                            <li><button class="text-red-400 hover:underline" onclick="showModal('mireGhouls')">Mire Ghouls</button> (Tier 1 Horde)</li>
-                            <li><button class="text-red-400 hover:underline" onclick="showModal('webPhantom')">Web Phantom</button> (Tier 2 Skulk)</li>
-                            <li><button class="text-red-400 hover:underline" onclick="showModal('hollowshadeMauler')">Hollowshade Mauler</button> (Tier 2 Bruiser)</li>
-                            <li><button class="text-red-400 hover:underline" onclick="showModal('spiderHatchlings')">Spider Hatchlings</button> (Tier 1 Horde)</li>
-                            <li><button class="text-red-400 hover:underline" onclick="showModal('chitteringHeart')">The Chittering Heart</button> (Tier 2 Solo)</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-display text-2xl font-bold mb-4 text-red-400">Rewards & Loot</h3>
-                        <ul class="list-disc list-inside space-y-2">
-                            <li><strong>Gold:</strong> In the witches' abandoned altar room, a loose stone conceals a lockbox with <strong>2 Bags of gold</strong>.</li>
-                            <li><strong>Consumables:</strong> 2x Health Potion, 1x Vial of Darksmoke, 1x Dripfang Poison.</li>
-                            <li class="mt-4">
-                                <strong class="text-red-300">Special Reward: The Druid's Seed</strong>
-                                <p class="text-sm text-gray-400">A pulsating, chitonous seed humming with trapped power. Requires a "Work on a Project" downtime move to harness.</p>
-                                <ul class="list-circle list-inside ml-4 mt-2 space-y-1 text-sm">
-                                    <li><strong>1. Weapon (Druid's Wrath):</strong> T3 Primary Weapon (Instinct, Melee, d10+5 magic). Feature: On hit, mark Stress to make target temporarily Restrained.</li>
-                                    <li><strong>2. Armor (Chitinous Carapace):</strong> T3 Armor (Base Score 5, Thresholds 15/35). Feature: When you take Major+ melee damage, attacker takes 1d10 direct physical damage.</li>
-                                    <li><strong>3. Item (Heart of the Hill):</strong> Once per long rest, plant the seed. It creates a Close area where allies heal 1 HP at the start of their turn. Each time it heals, GM gains 1 Fear.</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="mechanic-box p-4 rounded mt-4">
+                    <strong class="text-red-400">The Shadow of the Tree (Tier 2 Environment)</strong>
+                    <p><strong>Difficulty:</strong> 14 | <strong>Impulses:</strong> Protect the heart, Overwhelm intruders</p>
+                    <p><strong>Feature - Dynamic Consequence Countdown (6): The Heart Awakens:</strong> Counts down when a PC rolls with Fear; on each tick, all PCs mark 1 Stress. At 0: summon 1d4+1 <button class="text-red-400 hover:underline" onclick="showModal('spiderHatchlings')">Spider Hatchlings</button>.</p>
                 </div>
             `;
+             document.getElementById('beat5_content').innerHTML = `
+                <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
+                <p>Kaelen, convinced, sends the party to the witches. His daughter Lena guides them to the Trail of Treats, which magically reveals itself to her before she returns home. Along the way, they are attacked by <button class="text-red-400 hover:underline" onclick="showModal('mireGhouls')">Mire Ghouls</button>.</p>
+                <blockquote class="read-aloud p-4 my-4">The path of treats is even more unsettling this time... As you follow its winding path deeper into the mangrove swamp, the dark water beside the path begins to bubble. Filthy, waterlogged shapes claw their way from the muck—bodies in a state of advanced decay, their eyes burning with a cold, dead light.</blockquote>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Map</h4>
+                <p>The combat occurs on a narrow, 10-foot wide muddy causeway surrounded by murky water. The ghouls can emerge from the water anywhere along the path. The two shacks are on a small, muddy island, 40 feet in diameter.</p>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Tactics</h4>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>Mire Ghouls:</strong> As a Horde, they will use their numbers to swarm the party. They will attempt to use their Overwhelm reaction to punish characters who engage them in melee, aiming to drain resources and sow chaos rather than secure kills.</li>
+                </ul>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Social</h4>
+                <p>After the combat, the party reaches the witches' sanctum. They interact with the witches through a magic painting and their servant, Agnes. The goal is to receive the ritual knife needed for the witches' price.</p>
+             `;
+             document.getElementById('beat6_content').innerHTML = `
+                <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
+                <p>The party returns to Kaelen with the knife. He leads them to his tannery for the bloody sacrifice. Afterwards, they return to the witches' sanctum.</p>
+                <blockquote class="read-aloud p-4 my-4">Kaelen takes the obsidian knife... with a swift, brutal motion, slices off his own left ear, catching it and the gush of blood in the bowl. He pushes it towards you... "This is the price of their protection," he grits out. "Now go. Finish this."</blockquote>
+                <blockquote class="read-aloud p-4 my-4">You return to the witches' sanctum... the painting of the three beautiful women ripples... they step out of the frame... Their beauty sloughs away, revealing their true forms: hideous, twisted crones... "The bargain is struck," she rasps. "The shield on the hill is gone. Go now. Destroy the heart of that place. End the threat to <i>our</i> domain." With that, they dissolve into a foul-smelling fog...</blockquote>
+                 <h4 class="font-display text-xl font-bold text-red-400">Social</h4>
+                <p>This is a narrative and social beat focused on witnessing the sacrifice and the witches' true nature. There are opportunities for roleplaying reactions to Kaelen's desperation and the witches' horrifying reveal.</p>
+             `;
+             document.getElementById('beat7_content').innerHTML = `
+                <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
+                <p>The party returns to Hollowshade Hill. The green shield is gone. The hole is now an open maw. The pounding from below is frantic. The final boss is <button class="text-red-400 hover:underline" onclick="showModal('chitteringHeart')">The Chittering Heart</button>.</p>
+                <blockquote class="read-aloud p-4 my-4">You drop into the cavern once more. The green shield is gone. You stand before the Chittering Heart, a grotesque fusion of man, wood, and arachnid horror... It is the druid from the legends, his body a nightmare prison for something far worse. As it senses you, a dozen red eyes on its bloated thorax snap open, and a sound like a million spiders chittering in unison fills your mind.</blockquote>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Map</h4>
+                <p>This is the same 40-foot circular cavern from Beat 4. However, the walls are now covered in pulsating egg-sacs, and thick, woody roots (difficult terrain) have erupted from the floor around the Chittering Heart.</p>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Tactics</h4>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>The Chittering Heart:</strong> As a Solo monster, it will use its Relentless feature to act twice per round. It will start by using Lashing Roots to control the battlefield and restrain characters. It will target ranged or spellcasting characters with its Venom Spit. If characters get close, it will use Skittering Limbs. Its Maddening Drone reaction makes melee combat a risky proposition. When it takes Severe damage, it will summon <button class="text-red-400 hover:underline" onclick="showModal('spiderHatchlings')">Spider Hatchlings</button> to swarm the party.</li>
+                </ul>
+                <div class="mechanic-box p-4 rounded mt-4">
+                     <strong class="text-red-400">The Chittering Heart's Lair (Tier 2 Environment)</strong>
+                    <p><strong>Difficulty:</strong> 15 | <strong>Impulses:</strong> Defend the heart, Unleash arachnid horrors</p>
+                    <p><strong>Feature - Lashing Roots (Action - Fear):</strong> All PCs make Agility (Maneuver) Reaction Rolls (15). On a failure, they become <i>Restrained</i> until they break free with a successful Strength Roll (15).</p>
+                    <p><strong>Feature - Hatchlings (Reaction):</strong> When the Heart marks Severe damage, 1d4+1 <button class="text-red-400 hover:underline" onclick="showModal('spiderHatchlings')">Spider Hatchlings</button> erupt from sacs at Far and rush to Close at end of the round.</p>
+                </div>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Treasure & Project Ideas</h4>
+                <div class="p-4 bg-gray-900/50 rounded-lg border border-gray-700">
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Gold:</strong> In the witches' abandoned altar room, a loose stone conceals a lockbox with <strong>2 Bags of gold</strong>.</li>
+                        <li><strong>Consumables:</strong> 2x Health Potion, 1x Vial of Darksmoke, 1x Dripfang Poison.</li>
+                        <li class="mt-4">
+                            <strong class="text-red-300">Special Reward: The Druid's Seed</strong>
+                            <p class="text-sm text-gray-400">A pulsating, chitonous seed humming with trapped power. Requires a "Work on a Project" downtime move to harness.</p>
+                            <ul class="list-circle list-inside ml-4 mt-2 space-y-1 text-sm">
+                                <li><strong>Weapon (Druid's Wrath):</strong> T3 Primary Weapon (Instinct, Melee, d10+5 magic). Feature: On hit, mark Stress to make target temporarily <i>Restrained</i>.</li>
+                                <li><strong>Armor (Chitinous Carapace):</strong> T3 Armor (Base Score 5, Thresholds 15/35). Feature: When you take Major+ melee damage, attacker takes 1d10 direct physical damage.</li>
+                                <li><strong>Item (Heart of the Hill):</strong> Once per long rest, plant the seed. It creates a Close area where allies heal 1 HP at the start of their turn. Each time it heals, GM gains 1 Fear.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+             `;
         }
-
 
         function showModal(adversaryId) {
             const data = adversaryData[adversaryId];
@@ -377,14 +341,13 @@
                         <p class="text-sm italic text-gray-300">${data.source}</p>
                     </div>
                     <div class="p-4 space-y-3">
-                        ${data.description ? `<p class="text-gray-300 italic">${data.description}</p>` : ''}
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center pt-2">
                             <div><p class="text-xs text-gray-400">Difficulty</p><p class="font-bold text-xl accent-red">${data.difficulty}</p></div>
                             <div><p class="text-xs text-gray-400">Thresholds</p><p class="font-bold text-lg">${data.thresholds}</p></div>
                             <div><p class="text-xs text-gray-400">HP</p><p class="font-bold text-xl">${data.hp}</p></div>
                             <div><p class="text-xs text-gray-400">Stress</p><p class="font-bold text-xl">${data.stress}</p></div>
                         </div>
-                        <div><p class="font-semibold text-red-400">Attack</p><p>${data.atk}</p></div>
+                        <div><p class="font-semibold text-red-400">Attack</p><p>${data.atk} | ${data.damage}</p></div>
                          <div><p class="font-semibold text-red-400">Experience</p><p>${data.experience}</p></div>
                         <div class="border-t border-gray-600 pt-3"><h4 class="font-display text-lg font-bold">Features</h4>${featuresHtml}</div>
                     </div>
@@ -402,4 +365,3 @@
     </script>
 </body>
 </html>
-
