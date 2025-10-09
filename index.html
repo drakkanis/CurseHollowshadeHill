@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Hollowshade Noir -->
     <!-- Application Structure Plan: A single-page, vertically scrolling application with a persistent left-hand navigation sidebar (on medium screens and up) for quick access to key sections (Overview, Beats, Adversaries). This linear structure mirrors the adventure's flow, which is ideal for a GM running a session. Beats are presented in collapsible sections to manage information density. The key interaction is a modal system for adversary stat blocks, allowing the GM to view creature details instantly without scrolling away from the current scene, which is critical for maintaining game pace. This design prioritizes at-a-glance readability and rapid information retrieval. -->
-    <!-- Visualization & Content Choices: The primary "visualization" is the interactive At-a-Glance table which provides a high-level summary and acts as a navigation hub. Instead of traditional charts, the focus is on clear information architecture. Key mechanics like 'Countdowns' are presented in visually distinct callout boxes. Textual content, especially 'Read-Aloud Text', is isolated in blockquotes for clarity. The most critical interactive element is the modal pop-up for adversary stat blocks, chosen to prevent disruptive scrolling during combat. All elements are built with HTML/CSS/JS. Confirmed NO SVG/Mermaid used. -->
+    <!-- Visualization & Content Choices: The primary "visualization" is the interactive At-a-Glance table which provides a high-level summary and acts as a navigation hub. Instead of traditional charts, the focus is on clear information architecture. Key mechanics like 'Countdowns' are presented in visually distinct callout boxes. Textual content, especially 'Read-aloud Text', is isolated in blockquotes for clarity. The most critical interactive element is the modal pop-up for adversary stat blocks, chosen to prevent disruptive scrolling during combat. All elements are built with HTML/CSS/JS. Confirmed NO SVG/Mermaid used. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         html {
@@ -93,6 +93,8 @@
             <li><a href="#summary" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Adventure Summary</a></li>
             <li><a href="#hooks" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Adventure Hooks</a></li>
             <li><a href="#beats" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Adventure Beats</a></li>
+            <li><a href="#conclusion" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Conclusion</a></li>
+            <li><a href="#rewards" class="sidebar-link block py-2 px-3 rounded transition-colors duration-200">Rewards & Loot</a></li>
         </ul>
     </nav>
 
@@ -137,7 +139,7 @@
                 </div>
                 <div class="p-6 bg-gray-800/50 rounded-lg border border-gray-700">
                     <h3 class="font-display text-xl font-bold text-red-400 mb-2">2. The Lost Patrol</h3>
-                    <p>A fellow Daggerheart, a friend or rival, led a small patrol into Hollowshade a fortnight ago to investigate strange reports and never returned. You carry a token they gave you. You have tracked them to the edge of the swamp, and now you must venture in to find out what happened and bring them home.</p>
+                    <p>A fellow friend or rival, led a small patrol into Hollowshade a fortnight ago to investigate strange reports and never returned. You carry a token they gave you. You have tracked them to the edge of the swamp, and now you must venture in to find out what happened and bring them home.</p>
                 </div>
                 <div class="p-6 bg-gray-800/50 rounded-lg border border-gray-700">
                     <h3 class="font-display text-xl font-bold text-red-400 mb-2">3. The Witch's Debt</h3>
@@ -166,6 +168,10 @@
                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 6: A Bloody Toll</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat6_content"></div></details>
                 <!-- BEAT 7 -->
                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 7: The Chittering Heart</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat7_content"></div></details>
+                <!-- CONCLUSION -->
+                <details id="conclusion" class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden scroll-mt-20"><summary class="font-display text-3xl p-6 font-bold text-red-500">Conclusion</summary><div class="p-6 border-t border-gray-700 space-y-4" id="conclusion_content"></div></details>
+                <!-- REWARDS & LOOT -->
+                <details id="rewards" class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden scroll-mt-20"><summary class="font-display text-3xl p-6 font-bold text-red-500">Rewards & Loot</summary><div class="p-6 border-t border-gray-700 space-y-4" id="rewards_content"></div></details>
             </div>
         </section>
 
@@ -181,11 +187,219 @@
 
     <script>
         const adversaryData = {
-            direWolf: { name: 'Dire Wolf', source: 'Tier 1 Skulk', difficulty: 12, thresholds: '5 / 9', hp: 4, stress: 3, atk: '+2 Claws (Melee)', damage: '1d6+2 phy', experience: 'Keen Senses +3', features: [{ name: 'Pack Tactics (Passive)', text: 'If the Wolf makes a successful attack and another Dire Wolf is within Melee range of the target, deal 1d6+5 physical damage instead and you gain a Fear.' }, { name: 'Hobbling Strike (Action)', text: 'Mark a Stress to make an attack against a target within Melee range. On a success, deal 3d4+10 direct physical damage and make them <i>Vulnerable</i> until they clear at least 1 HP.' }] },
-            webPhantom: { name: 'Web Phantom', source: 'Tier 2 Skulk', difficulty: 13, thresholds: '11 / 22', hp: 6, stress: 3, atk: '+3 Bite and Claws (Melee)', damage: '2d8+6 phy', experience: 'Ambusher +2', features: [{ name: 'Webstrider (Passive)', text: 'The Web Phantom can move through dense webbing and soft earth as easily as air. While fully within webbing, they are <i>Hidden</i> and immune to damage.' }, { name: 'Rocky Ambush (Action)', text: 'While <i>Hidden</i>, mark a Stress to leap into Melee range with a target. The target must succeed on an Agility or Instinct Reaction Roll (15) or take 2d8 physical damage and become temporarily <i>Restrained</i>.' }, { name: 'Momentum (Reaction)', text: 'When the Web Phantom makes a successful attack against a PC, you gain a Fear.' }] },
-            spiderHatchlings: { name: 'Spider Hatchlings', source: 'Tier 1 Horde', difficulty: 10, thresholds: '6 / 10', hp: 6, stress: 2, atk: '-3 Claws (Melee)', damage: '1d8+2 phy', experience: 'N/A', features: [{ name: 'Horde (1d4+1) (Passive)', text: 'When the Swarm has marked half or more of their HP, their standard attack deals 1d4+1 physical damage instead.' }, { name: 'In Your Face (Passive)', text: 'All targets within Melee range have disadvantage on attacks against targets other than the Swarm.' }] },
+            druidsSeedProject: {
+                name: "The Druid's Seed",
+                source: 'Special Reward Project',
+                description: 'A pulsating, chitonous seed, still warm to the touch. It is inert but hums with trapped, volatile power.',
+                project: 'A character can undertake a Work on a Project downtime move called "Taming the Chittering Heart" to harness its power.',
+                outcomes: [
+                    { title: "Weapon (Druid's Wrath)", text: "T3 Primary Weapon (Instinct, Melee, d10+5 magic). Feature: On hit, mark Stress to make target temporarily <i>Restrained</i>." },
+                    { title: "Armor (Chitinous Carapace)", text: "T3 Armor (Base Score 5, Thresholds 15/35). Feature: When you take Major+ melee damage, attacker takes 1d10 direct physical damage." },
+                    { title: "Item (Heart of the Hill)", text: "Once per long rest, plant the seed. It creates a Close area where allies heal 1 HP at the start of their turn. Each time it heals, GM gains 1 Fear." }
+                ]
+            },
+            druidsSeed: {
+                name: "The Druid's Seed",
+                source: 'Special Reward',
+                description: 'A pulsating, chitonous seed, still warm to the touch. It is inert but hums with trapped, volatile power.',
+                project: 'A character can undertake a Work on a Project downtime move called "Taming the Chittering Heart" to harness its power.'
+            },
+            unstableArcaneShard: { name: 'Unstable Arcane Shard', source: 'Item', description: 'You can make a Finesse Roll to throw this shard at a group of adversaries within Far range. Targets you succeed against take 1d20 magic damage.'},
+            improvedGrindletoothVenom: { name: 'Improved Grindletooth Venom', source: 'Item', description: 'You can apply this venom to a weapon that deals physical damage to add a d8 to your next damage roll with that weapon.'},
+            homingCompasses: { name: 'Homing Compasses', source: 'Item', description: 'These two compasses point toward each other no matter how far apart they are.'},
+            attunePotion: { name: 'Attune Potion', source: 'Item', description: 'You gain a +1 bonus to your next Instinct Roll.'},
+            minorStaminaPotion: { name: 'Minor Stamina Potion', source: 'Item', description: 'Clear 1d4 Stress.'},
+            varikLeaves: { name: 'Varik Leaves', source: 'Item', description: 'You can eat these paired leaves to immediately gain 2 Hope.'},
+            stridePotion: { name: 'Stride Potion', source: 'Item', description: 'You gain a +1 bonus to your next Agility Roll.'},
+            vialOfMoondrip: { name: 'Vial of Moondrip', source: 'Item', description: 'When you drink the contents of this vial, you can see in total darkness until your next rest.'},
+            minorHealthPotion: { name: 'Minor Health Potion', source: 'Item', description: 'Clear 1d4 HP.'},
+            arcanePrism: { name: 'Arcane Prism', source: 'Item', description: 'Position this prism in a location of your choosing and activate it. All allies within Close range of it gain a +1 bonus to their Spellcast Rolls. While activated, the prism can’t be moved. Once the prism is deactivated, it can’t be activated again until your next long rest.'},
+            chitteringHeart: {
+                name: 'The Chittering Heart',
+                source: 'Tier 2 Solo',
+                difficulty: 16,
+                thresholds: '15 / 28',
+                hp: 13,
+                stress: 8,
+                atk: '+4 Bite (Melee)',
+                damage: '2d8+8 phy',
+                experience: 'Stealth +3',
+                features: [
+                    { name: 'Relentless (3) (Passive)', text: 'The Heart can be spotlighted up to three times per GM turn. Spend Fear as usual.' },
+                    { name: 'Dreadful Presence (Passive)', text: 'When a PC rolls with Fear while within Close range of the Heart, they lose a Hope.'},
+                    { name: 'Corrupting Touch (Action)', text: 'Mark a Stress to make an attack against a target within Melee range. On a success, deal 2d10+6 direct physical damage, and the target must succeed on an Instinct Reaction Roll (16) or become temporarily <i>Vulnerable</i>.'},
+                    { name: 'Web Explosion (Action - Fear)', text: 'Spend 1 Fear to cause webbing to erupt from the ground. All targets within Close range must make an Agility Reaction Roll (16). Targets who fail take 2d8+4 physical damage and become temporarily <i>Restrained</i>.'},
+                    { name: 'Psychic Rebuke (Reaction)', text: 'When the Heart takes damage from an attack within Close range, you can mark a Stress to force the attacker to make an Instinct Reaction Roll (16). On a failure, they take 2d8+2 magic damage from psychic feedback.'},
+                    { name: 'Momentum (Reaction)', text: 'When the Heart makes a successful attack against a PC, you gain a Fear.'}
+                ]
+            },
+            brawnyZombie: {
+                name: 'Brawny Zombie',
+                source: 'Tier 1 Bruiser',
+                difficulty: 10,
+                thresholds: '8 / 15',
+                hp: 7,
+                stress: 4,
+                atk: '+2 Slam (Very Close)',
+                damage: '1d12+3 phy',
+                experience: 'Collateral Damage +2, Throw +4',
+                description: 'A large corpse, decay-bloated and angry.',
+                motive: 'Crush, destroy, hail debris, slam.',
+                features: [
+                    { name: 'Slow (Passive)', text: 'When you spotlight the Zombie and they don’t have a token on their stat block, they can’t act yet. Place a token on their stat block and describe what they’re preparing to do. When you spotlight the Zombie and they have a token on their stat block, clear the token and they can act.' },
+                    { name: 'Rend Asunder (Action)', text: 'Make a standard attack with advantage against a target the Zombie has <i>Restrained</i>. On a success, the attack deals direct damage.' },
+                    { name: 'Rip and Tear (Reaction)', text: 'When the Zombie makes a successful standard attack, you can mark a Stress to temporarily <i>Restrain</i> the target and force them to mark 2 Stress.' }
+                ]
+            },
+            rottedZombie: {
+                name: 'Rotted Zombie',
+                source: 'Tier 1 Minion',
+                difficulty: 8,
+                thresholds: 'None',
+                hp: 1,
+                stress: 1,
+                atk: '-3 Bite (Melee)',
+                damage: '2 phy',
+                experience: 'N/A',
+                description: 'A decaying corpse ambling toward their prey.',
+                motive: 'Eat flesh, hunger, maul, surround.',
+                features: [
+                    { name: 'Minion (3) (Passive)', text: 'The Zombie is defeated when they take any damage. For every 3 damage a PC deals to the Zombie, defeat an additional Minion within range the attack would succeed against.' },
+                    { name: 'Group Attack (Action)', text: 'Spend a Fear to choose a target and spotlight all Rotted Zombies within Close range of them. Those Minions move into Melee range of the target and make one shared attack roll. On a success, they deal 2 physical damage each. Combine this damage.' }
+                ]
+            },
+            shamblingZombie: {
+                name: 'Shambling Zombie',
+                source: 'Tier 1 Standard',
+                difficulty: 10,
+                thresholds: '4 / 6',
+                hp: 4,
+                stress: 1,
+                atk: '+0 Bite (Melee)',
+                damage: '1d6+1 phy',
+                experience: 'N/A',
+                description: 'An animated corpse that moves shakily, driven only by hunger.',
+                motive: 'Devour, hungry, mob enemy, shred flesh.',
+                features: [
+                    { name: 'Too Many to Handle (Passive)', text: 'When the Zombie is within Melee range of a creature and at least one other Zombie is within Close range, all attacks against that creature have advantage.' },
+                    { name: 'Horrifying (Passive)', text: 'Targets who mark HP from the Zombie’s attacks must also mark a Stress.' }
+                ]
+            },
+            theSanctum: {
+                name: "The Witches' Sanctum",
+                source: 'Environment',
+                description: 'The trail ends at a small, muddy island with two dilapidated shacks. One is a children\'s hovel where a terrified woman named Agnes cares for Elspeth, Finn, and other listless children. The second is a windowless shack that serves as an altar room.',
+                details: [
+                    { title: 'The Altar Room', text: 'Inside, the only furnishing is a stone altar and a large painting on the far wall. The painting depicts three beautiful, naked women dancing around a bubbling cauldron. As the party enters, the candles on the altar burst into green flame.' },
+                    { title: 'Social Encounter', text: 'The figures in the painting move, their voices echoing from the canvas. These are the Ladies of the Forest. They are cruel to Agnes if she is present ("You stupid cow, get out!").' },
+                    { title: 'The Price', text: 'They agree to lower the shield but demand a "price of passage, a toll of conviction." A curved, obsidian knife materializes from the painting\'s frame and clatters onto the altar. "The Ealdorman knows the price. Bring us what is owed."' },
+                    { title: 'Checks', text: '<ul class="list-disc list-inside space-y-2"><li><strong>Instinct (Sense) check (DC 14):</strong> To notice the unnatural, almost enchanted docility of the children in Agnes\'s care.</li><li><strong>Presence (Charm) check (DC 15):</strong> To attempt to reason with the witches. They will not budge on their price, but a success with Hope might glean a cryptic clue: "Flesh and fear pay the oldest debts."</li></ul>' },
+                    { title: 'Escalations (Fear Spends)', text: '<ul class="list-disc list-inside space-y-2"><li><strong>Spend 1 Fear:</strong> The witches command Agnes, "Get that knife, woman!" Her hands tremble so violently she drops it, earning a telepathic shriek of rage from the painting that makes everyone in the room mark a Stress.</li></ul>' }
+                ]
+            },
+            spiderNestGuardian: {
+                name: 'Spider Nest Guardian',
+                source: 'Tier 2 Solo',
+                difficulty: 15,
+                thresholds: '12 / 24',
+                hp: 9,
+                stress: 5,
+                atk: '+4 Bite (Very Close)',
+                damage: '2d12+6 phy',
+                experience: 'Tremor Sense +2',
+                description: 'A horrifying, horse-sized spider with chitinous plates like jagged rock and powerful, burrowing legs.',
+                motive: 'Guard the nest, drag prey underground, cocoon victims.',
+                features: [
+                    { name: 'Relentless (3) (Passive)', text: 'The Nest Guardian can be spotlighted up to three times per GM turn. Spend Fear as usual to spotlight them.' },
+                    { name: 'Web Eruption (Action)', text: 'Mark a Stress to have the Guardian burst from the ground in a shower of webbing. All creatures within Very Close range must succeed on an Agility Reaction Roll or be knocked over and become temporarily <i>Restrained</i> by sticky webs.' },
+                    { name: 'Spit Webbing (Action)', text: 'Make an attack against all targets in front of the Guardian within Close range. Targets the Guardian succeeds against take 1d6 physical damage and are covered in sticky webbing, giving them disadvantage on their next Agility roll.' },
+                    { name: 'Venomous Burst (Reaction)', text: 'When the Guardian takes Severe damage, all creatures within Close range are bathed in their venomous ichor, taking 1d10 direct physical damage. This splash covers the ground within Very Close range, and all creatures other than the Guardian who move through it take 1d6 direct physical damage.' }
+                ]
+            },
+            spiderWarrior: {
+                name: 'Spider Warrior',
+                source: 'Tier 2 Bruiser',
+                difficulty: 15,
+                thresholds: '10 / 24',
+                hp: 6,
+                stress: 5,
+                atk: '+3 Bite (Melee)',
+                damage: '2d12+5 phy',
+                experience: 'Camouflage +2',
+                description: 'A human-sized arachnid with thick, armored legs and dripping fangs.',
+                motive: 'Ambush, feed, poison.',
+                features: [
+                    { name: 'Skittering Strike (Action)', text: 'Mark a Stress to make a standard attack against two targets within Melee range.' },
+                    { name: 'Venomous Bite (Action)', text: 'Make an attack against a target within Melee range. On a success, spend a Fear to deal 1d4+4 physical damage and <i>Poison</i> them until their next rest or they succeed on a Knowledge Roll (16). While <i>Poisoned</i>, the target must roll a d6 before they make an action roll. On a result of 4 or lower, they must mark a Stress.' },
+                    { name: 'Momentum (Reaction)', text: 'When the Spider Warrior makes a successful attack against a PC, you gain a Fear.' }
+                ]
+            },
+            spiderWorker: {
+                name: 'Spider Worker',
+                source: 'Tier 2 Minion',
+                difficulty: 13,
+                thresholds: 'None',
+                hp: 1,
+                stress: 1,
+                atk: '+0 Bite (Melee)',
+                damage: '1d4+4 phy',
+                experience: 'Keen Senses +3',
+                description: 'A dog-sized spider that moves with unsettling speed, tending to webs and egg sacs.',
+                motive: 'Tend to the nest, overwhelm intruders, drag away the weak.',
+                features: [
+                    { name: 'Minion (6) (Passive)', text: 'The Worker is defeated when they take any damage. For every 6 damage a PC deals to the Worker, defeat an additional Minion within range the attack would succeed against.' },
+                    { name: 'Group Attack (Action)', text: 'Spend a Fear to choose a target and spotlight all Spider Workers within Close range of them. Those Minions move into Melee range of the target and make one shared attack roll. On a success, they deal 1d4+4 physical damage each. Combine this damage.' }
+                ]
+            },
+            spiderHatchlingSwarm: {
+                name: 'Spider Hatchling Swarm',
+                source: 'Tier 2 Horde',
+                difficulty: 13,
+                thresholds: '10 / 18',
+                hp: 6,
+                stress: 3,
+                atk: '+0 Bite (Melee)',
+                damage: '2d6+7 phy',
+                experience: 'N/A',
+                description: 'A skittering mass of fist-sized spiders moving as one ravenous wave.',
+                motive: 'Consume, obscure, swarm.',
+                features: [
+                    { name: 'Horde (1d6+5) (Passive)', text: 'When the Swarm has marked half or more of their HP, their standard attack deals 1d6+5 physical damage instead.' },
+                    { name: 'In Your Face (Passive)', text: 'All targets within Melee range have disadvantage on attacks against targets other than the Swarm.' }
+                ]
+            },
+            weaversDen: {
+                name: "Village of Weaver's Den",
+                source: 'Locale',
+                population: 'Approximately 25 souls',
+                description: 'A small, grim hamlet of five homes and a longhouse, all built on stilts above the black, stagnant water of the mangrove swamp. Rickety boardwalks connect the buildings, and the air is thick with the smell of woodsmoke, decay, and the chemicals from the tannery.',
+                leadership: 'The de facto leader is Ealdorman Kaelen, the village tanner. A tall, weary man in his late 40s, he carries the weight of his people\'s survival with a quiet, grim resolve.',
+                demographics: 'The population is predominantly human, hardened by generations of life in the swamp. A handful of reclusive Ribbet families and a couple of stoic Wildborne halflings also call the village home.',
+                economics: 'Survival is eked out through fishing the murky waters, trapping small game in the mangroves, and Kaelen\'s tannery, which processes the hides. They trade occasionally with outsiders, but trust is a rare commodity.',
+                locales: 'The most notable buildings are the guest longhouse, Kaelen\'s Tannery at the edge of the village, and the central well. Paths lead either back towards Mire\'s End or deeper into the treacherous swamp towards Hollowshade Hill.'
+            },
+            kaelen: { 
+                name: 'Kaelen', 
+                source: 'Tier 2 Social', 
+                difficulty: 14, 
+                thresholds: '6 / None', 
+                hp: 2, 
+                stress: 4, 
+                atk: '-2 Dagger (Melee)', 
+                damage: '1d4+2 phy', 
+                experience: 'History +2, Pillar of the Community +3',
+                description: 'A tall, weary man with kind eyes but a grim set to his mouth. His hands are stained from his work as a tanner, and he carries the weight of his village on his shoulders.',
+                motive: 'Care for the community, judge strangers\' intentions, speak softly, uphold tradition.',
+                features: [
+                    { name: 'Age Taught Me Well (Passive)', text: 'All action rolls to deceive the Elder have disadvantage.' },
+                    { name: 'No Hospitality (Action)', text: 'Mark a Stress to forbid any of the Elder’s allies from selling or providing comfort to a target or their allies for the next 2d6 days.' },
+                    { name: 'A Burden Shared (Action)', text: 'After hearing the party\'s story or seeing their capability, Kaelen can ask them to investigate Hollowshade Hill for proof of the growing evil. This sets the events of Beat 4 in motion.' }
+                ]
+            },
+            silas: { name: 'Silas', source: 'NPC', difficulty: 8, description: 'A weathered man in his late fifties, with a missing eye and a hand that bears the scarred imprint of a monstrous bite. He speaks in a low growl and smells faintly of pine and old leather.', motive: 'Warn others away from the spiders that nearly killed him.', community: 'Wanderborne', ancestry: 'Human', pronouns: 'he/him', features: 'Gruff, Jaded, Practical', experience: 'Tracker +3' },
+            brevin: { name: 'Brevin', source: 'NPC', difficulty: 8, description: 'A young man with a perpetually worried expression, constantly glancing over his shoulder. His clothes are well-made but stained with the muck of the road.', motive: 'Get his goods through Hollowshade without being eaten or robbed.', community: 'Wanderborne', ancestry: 'Halfling', pronouns: 'he/him', features: 'Anxious, Superstitious, Hasty', experience: 'Bartering +2' },
+            elara: { name: 'Elara', source: 'NPC', difficulty: 8, description: 'A woman whose expensive cloak and fine leather boots are caked in mud. She carries herself with an air of authority, but her eyes betray a deep-seated fear.', motive: 'Find a guide brave or foolish enough to escort her through Hollowshade.', community: 'Highborne', ancestry: 'Human', pronouns: 'she/her', features: 'Arrogant, Desperate, Imperious', experience: 'Nobility +2' },
             mireGhouls: { name: 'Mire Ghouls', source: 'Tier 1 Horde', difficulty: 8, thresholds: '6 / 12', hp: 6, stress: 3, atk: '-1 Bite (Melee)', damage: '1d10+2 phy', experience: 'N/A', features: [{ name: 'Horde (1d4+2) (Passive)', text: 'When the Ghouls have marked half or more of their HP, their standard attack deals 1d4+2 physical damage instead.' }, { name: 'Overwhelm (Reaction)', text: 'When the Ghouls mark HP from an attack within Melee range, you can mark a Stress to make a standard attack against the attacker.' }] },
-            chitteringHeart: { name: 'The Chittering Heart', source: 'Tier 2 Solo', difficulty: 15, thresholds: '13 / 25', hp: 9, stress: 3, atk: '+4 Venom Spit (Far)', damage: '2d20+3 mag', experience: 'Stealth +3', features: [{ name: 'Relentless (2) (Passive)', text: 'The Heart can be spotlighted up to two times per GM turn. Spend Fear as usual.' }, { name: 'Skittering Limbs (Action)', text: 'Make an attack against a target within Melee range. On a success, mark a Stress to deal 2d10+4 physical damage and the target must mark a Stress.' }, { name: 'Maddening Drone (Reaction)', text: 'When the Heart takes damage from an attack within Close range, spend a Fear to force the attacker to make an Instinct Reaction Roll (DC 15). On a failure, they mark 1 HP from psychic feedback and become temporarily <i>Vulnerable</i>.' }] },
             hollowshadeMauler: { name: 'Hollowshade Mauler', source: 'Tier 2 Bruiser', difficulty: 16, thresholds: '14 / 27', hp: 7, stress: 5, atk: '+2 Vicious Mandibles (Very Close)', damage: '2d8+5 phy', experience: 'Navigation +2', features: [{ name: 'Ramp Up (Passive)', text: 'You must spend a Fear to spotlight the Mauler. While spotlighted, they can make their standard attack against all targets within range.' }, { name: 'Charging Bull (Action)', text: 'Mark a Stress to charge through a group within Close range and make an attack against all targets in its path. Targets the Mauler succeeds against take 2d6+8 physical damage and are knocked back to Far range.' }, { name: 'Gore (Action)', text: 'Make an attack against a target within Very Close range, moving into Melee range of them. On a success, deal 2d8 direct physical damage.' }] }
         };
 
@@ -195,17 +409,48 @@
         function populateContent() {
             document.getElementById('beat1_content').innerHTML = `
                 <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
-                <p>The adventure begins in Mire's End, a remote village far from Hollowshade. The party is on an urgent quest, carrying a <strong>Heartseed</strong>—a faintly glowing magical seed that must be planted in a sanctum beyond the forest to save a dying noble. The perilous path through Hollowshade is the only one fast enough.</p>
-                <blockquote class="read-aloud p-4 my-4">The track dissolves into a muddy street that cuts through a collection of sagging, moss-covered buildings. This must be Mire's End. A perpetual drizzle falls from a grey sky, and the air hangs thick with the smell of wet earth and woodsmoke. A single tavern, its sign depicting a boot half-sunk in mud, offers the only sign of welcome. You clutch the pouch containing the Heartseed; you can feel its faint, desperate pulse against your palm. Time is running out.</blockquote>
+                <p>The characters find themselves here, from any number of reasons. Refer to the Adventure Hooks to bring the characters together.</p>
+                <blockquote class="read-aloud p-4 my-4">The track dissolves into a muddy street that cuts through a collection of sagging, moss-covered buildings. This must be Mire's End. A perpetual drizzle falls from a grey sky, and the air hangs thick with the smell of wet earth and woodsmoke. A single tavern, its sign depicting a boot half-sunk in mud, offers the only sign of welcome.</blockquote>
                 <h4 class="font-display text-xl font-bold text-red-400">Social</h4>
-                <p>This is a social encounter. Key NPCs include Silas, a grizzled trapper, and various nervous merchants and locals in the tavern. The goal is to gather information about the dangers of Hollowshade.</p>
+                <p>This is a social encounter. Key NPCs include <button class="text-red-400 hover:underline" onclick="showModal('silas')">Silas</button>, a grizzled trapper, <button class="text-red-400 hover:underline" onclick="showModal('brevin')">Brevin</button>, a nervous merchant, and <button class="text-red-400 hover:underline" onclick="showModal('elara')">Elara</button>, another trapper. The goal is to gather information about the dangers of Hollowshade.</p>
                 <h4 class="font-display text-xl font-bold text-red-400 mt-4">Features of the Area</h4>
                 <ul class="list-disc list-inside space-y-2">
                     <li><strong>Illumination:</strong> Grey, overcast daylight. The tavern interior is dimly lit by a single hearth and a few tallow candles.</li>
                     <li><strong>Roads/Paths:</strong> A single muddy main street.</li>
                     <li><strong>Foliage/Obscurement:</strong> The village is surrounded by a dreary, sparse woodland that gives way to the swamp.</li>
-                    <li><strong>Treasure:</strong> No treasure is found in this beat.</li>
                 </ul>
+                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Treasure</h4>
+                <p>Aside from the usual drinks and food, the innkeeper also sells the following consumables at the cost of 1 Handful of Gold each:</p>
+                <ul class="list-disc list-inside space-y-1 mt-2">
+                    <li>1x <button class="text-red-400 hover:underline" onclick="showModal('stridePotion')">Stride Potion</button></li>
+                    <li>1x <button class="text-red-400 hover:underline" onclick="showModal('vialOfMoondrip')">Vial of Moondrip</button></li>
+                    <li>2x <button class="text-red-400 hover:underline" onclick="showModal('minorHealthPotion')">Minor Health Potion</button></li>
+                </ul>
+                <p class="mt-2">The merchant can also be convinced with a Presence (Charm) DC 14 to sell his <button class="text-red-400 hover:underline" onclick="showModal('arcanePrism')">Arcane Prism</button> at the price of 2 handfuls of Gold.</p>
+                <div class="mechanic-box p-4 rounded mt-4">
+                    <strong class="text-red-400">Local Tavern</strong>
+                    <p>Tier 1 Social</p>
+                    <p class="italic text-sm text-gray-400">A lively tavern that serves as the social hub for its town.</p>
+                    <p class="mt-2"><strong>Impulses:</strong> Provide opportunities for adventurers, nurture community</p>
+                    <p><strong>Difficulty:</strong> 13</p>
+                    <p><strong>Potential Adversaries:</strong> None</p>
+                    <div class="mt-2">
+                        <p class="font-semibold">Features</p>
+                        <p class="mt-1"><i class="text-red-300">What’s the Talk of the Town? (Passive):</i> A PC can ask the bartender, staff, or patrons about local events, rumors, and potential work with a Presence Roll. On a success, they can pick two of the below details to learn—or three if they critically succeed. On a failure, they can pick one and mark a Stress as the local carries on about something irrelevant.</p>
+                        <ul class="list-disc list-inside ml-4 text-sm text-gray-300">
+                            <li>A local patrol went towards Hollowshade weeks ago and never came back. One of them was a friend of Silas's.</li>
+                            <li>A merchant is offering good coin for guards on a trip that skirts the edge of Hollowshade. Most are too scared to take it.</li>
+                            <li>They say the big tree on the hill grew from the heart of a trapped god... and some say you can still hear it beating on quiet nights.</li>
+                            <li>The people in the swamp are getting stranger. Heard they've gone back to the old ways, sending their own children out as offerings... madness.</li>
+                        </ul>
+                    </div>
+                     <div class="mt-2">
+                        <p><i class="text-red-300">Aid in the Kitchen (Passive):</i> A PC can aid the innkeeper one time by making an Agility or Finesse Roll. On a success, they earn 1d4 handfuls of gold (2d4 if they critically succeed). On a failure, they mark a Stress.</p>
+                    </div>
+                     <div class="mt-2">
+                        <p><i class="text-red-300">Bar Fight! (Action):</i> Spend a Fear to have a bar fight erupt in the tavern. When a PC tries to move through the tavern while the fight persists, they must succeed on an Agility or Presence Roll or take 1d6+2 physical damage from a wild swing or thrown object. A PC can try to activate this feature by succeeding on an action roll that would provoke tavern patrons.</p>
+                    </div>
+                </div>
             `;
             document.getElementById('beat2_content').innerHTML = `
                 <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
@@ -213,30 +458,55 @@
                 <blockquote class="read-aloud p-4 my-4">The air grows still and heavy, thick with the scent of decay and damp earth. The trees here are twisted and menacing. Ahead, two small figures, a boy and a slightly older girl, trudge down the muddy path. The girl clutches a small, empty wooden pail.</blockquote>
                 <h4 class="font-display text-xl font-bold text-red-400">Social</h4>
                 <p>This is a social encounter with two children, Elspeth (8) and Finn (6). Their story reveals the grim traditions of the Hollowshade villages and the influence of the "Ladies of the Forest."</p>
+                <div class="mechanic-box p-4 rounded my-4">
+                    <h4 class="font-display text-lg font-bold text-red-400">GM Notes</h4>
+                    <p><strong>Stakes:</strong> The safety of the two children, Elspeth (8) and Finn (6). Their story reveals the desperation of the Hollowshade folk.</p>
+                    <p class="mt-2"><strong>Dialogue & Clues:</strong></p>
+                    <ul class="list-disc list-inside ml-4 text-sm">
+                        <li>Elspeth: "I spilled the milk. All of it. Papa got... quiet. He told Mama the Ladies would provide. He sent us on the Trail of Treats."</li>
+                        <li>Further on, the trail is lined with crude gingerbread men and candies hanging from the trees with red and white knotted ropes and dangling colored paper.</li>
+                    </ul>
+                    <p class="mt-2"><strong>Motivation:</strong> The children mention they are from Weavers' Dell, the first village the party will encounter, giving them a reason to press on and ensure they get home safe.</p>
+                </div>
                 <h4 class="font-display text-xl font-bold text-red-400 mt-4">Features of the Area</h4>
                 <ul class="list-disc list-inside space-y-2">
                     <li><strong>Illumination:</strong> Dim light, heavily obscured by the thick canopy of the swamp.</li>
                     <li><strong>Roads/Paths:</strong> A muddy, treacherous track that is difficult terrain.</li>
                     <li><strong>Foliage/Obscurement:</strong> Gnarled mangrove-like trees and thick undergrowth provide heavy cover.</li>
                     <li><strong>Water/Swamp:</strong> The path is surrounded by stagnant, black water.</li>
+                    <li><strong>Cursed Treats:</strong> A character attempting to eat one, must make an Instinct Reaction roll to notice that the treats are cursed. On a success, the character marks a Stress as he notices that the treat dissolves into maggots. On a failure, the character is <i>Sickened</i> and loses one Hope.</li>
                 </ul>
-                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Treasure & Project Ideas</h4>
-                <p>The "treats" are magical illusions that dissolve into maggots and are not treasure.</p>
             `;
             document.getElementById('beat3_content').innerHTML = `
                 <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
                 <p>The party arrives at Weavers' Dell, a small, grim village of four or five houses built on stilts above the mangrove swamp. A single longhouse serves as a guest house, available for one handful of gold and an hour spent mending fishing nets.</p>
                 <blockquote class="read-aloud p-4 my-4">You follow the children to Weavers' Dell, a cluster of wooden homes perched on stilts above the black water. The place is eerily quiet, the only sounds the lapping of water and the incessant buzzing of flies. An old man, his face a roadmap of worry, sits on a porch mending a net. He watches your approach with tired, hollow eyes.</blockquote>
+                <div class="my-4"><button class="text-red-400 hover:underline" onclick="showModal('weaversDen')">Learn more about Weaver's Den</button></div>
                 <h4 class="font-display text-xl font-bold text-red-400">Social</h4>
-                <p>This social encounter involves interacting with the deeply suspicious and fearful villagers of Weavers' Dell, culminating in a conversation with a village elder who points them toward the Ealdorman, Kaelen.</p>
+                <p>This social encounter involves interacting with the deeply suspicious and fearful villagers of Weavers' Dell, culminating in a conversation with a village elder who points them toward the Ealdorman, <button class="text-red-400 hover:underline" onclick="showModal('kaelen')">Kaelen</button>.</p>
+                <div class="mechanic-box p-4 rounded my-4">
+                    <strong class="text-red-400">Grim Village</strong>
+                    <p>Tier 1 Social</p>
+                    <p class="italic text-sm text-gray-400">A small, grim village of wooden homes perched on stilts above the black water, reeking of desperation.</p>
+                    <p class="mt-2"><strong>Impulses:</strong> Display suspicion, Share burdens with strangers, Cling to grim tradition</p>
+                    <p><strong>Difficulty:</strong> 14</p>
+                    <p><strong>Potential Adversaries:</strong> None</p>
+                    <div class="mt-2">
+                        <p class="font-semibold">Features</p>
+                        <ul class="list-disc list-inside space-y-2 mt-2">
+                            <li><strong>Suspicious Eyes (Passive):</strong> All social rolls made to deceive the villagers are made with disadvantage. These people have been lied to before.</li>
+                            <li><strong>Communal Meal (Action):</strong> During the evening meal, a PC can make a Presence Roll (14) to get an elder to open up about the village's troubles. On a success, the elder reveals two problems (baying wolves, sour milk, incessant barking, bandits). On a failure, he mentions only one before falling silent.</li>
+                            <li><strong>Whispers in the Dark (Reaction - Fear):</strong> Spend 1 Fear after a PC asks a question. A villager misinterprets it as a threat or mockery, imposing disadvantage on the party's next social roll in the village.</li>
+                        </ul>
+                    </div>
+                </div>
                 <h4 class="font-display text-xl font-bold text-red-400 mt-4">Features of the Area</h4>
                 <ul class="list-disc list-inside space-y-2">
                     <li><strong>Illumination:</strong> Dim light beneath the swamp canopy.</li>
                     <li><strong>Structures:</strong> Four or five wooden houses and a longhouse, all on stilts. Rickety boardwalks connect them.</li>
                     <li><strong>Water/Swamp:</strong> The entire village is built over the black, murky water of the swamp.</li>
+                    <li><strong>Treasure:</strong> The villagers do not have too much to offer but the local troublemaker, a kid named Wirt can sell the following items for two handfuls of Gold: 1x <button class="text-red-400 hover:underline" onclick="showModal('attunePotion')">Attune Potion</button>, 1x <button class="text-red-400 hover:underline" onclick="showModal('minorStaminaPotion')">Minor Stamina Potion</button>, 1x <button class="text-red-400 hover:underline" onclick="showModal('varikLeaves')">Varik Leaves</button>. He can be persuaded with a Presence roll DC 15 to lower the price to one handful, if the character threatens him with reporting his activities to the ealdorman.</li>
                 </ul>
-                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Treasure & Project Ideas</h4>
-                <p>No treasure is found in this beat.</p>
             `;
             document.getElementById('intermission_content').innerHTML = `
                 <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
@@ -246,31 +516,40 @@
             `;
             document.getElementById('beat4_content').innerHTML = `
                 <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
-                <p>Ealdorman Kaelen, the village tanner, asks the party to investigate the hill before seeking the "Ladies." He wants proof of the threat. The encounter features an ambush by 5x <button class="text-red-400 hover:underline" onclick="showModal('direWolf')">Dire Wolves</button> outside the tree's cavern, and 3x <button class="text-red-400 hover:underline" onclick="showModal('webPhantom')">Web Phantoms</button> inside.</p>
+                <p>Ealdorman Kaelen, the village tanner, asks the party to investigate the hill before seeking the "Ladies." He wants proof of the threat. The encounter features an ambush within the cavern by 1x <button class="text-red-400 hover:underline" onclick="showModal('spiderNestGuardian')">Spider Nest Guardian</button>, 2x <button class="text-red-400 hover:underline" onclick="showModal('spiderWarrior')">Spider Warriors</button>, 1x <button class="text-red-400 hover:underline" onclick="showModal('spiderWorker')">Spider Worker</button>, and 1x <button class="text-red-400 hover:underline" onclick="showModal('spiderHatchlingSwarm')">Spider Hatchling Swarm</button>.</p>
                 <blockquote class="read-aloud p-4 my-4">The base of Hollowshade Hill is a nightmare of grasping roots and thick webs. The great tree looms above, its blood-dark leaves blotting out the sky. The air is cold and vibrates with a low thrumming you feel in your bones—the same pounding beat from your dream.</blockquote>
                 <h4 class="font-display text-xl font-bold text-red-400 mt-4">Map</h4>
-                <p>The area at the base of the hill is a circular clearing, 50 feet in diameter, choked with thick roots (difficult terrain). The concealed hole to the cavern is in the center. The surrounding swamp trees provide cover for the wolves to ambush from. The cavern inside is a single 40-foot circular chamber with a 10-foot deep pool of water on one side.</p>
+                <p>The area at the base of the hill is a circular clearing, 50 feet in diameter, choked with thick roots (difficult terrain). A concealed hole in the center drops into the cavern. The cavern inside is a single 40-foot circular chamber with a 10-foot deep pool of water on one side and covered in thick webbing.</p>
                 <h4 class="font-display text-xl font-bold text-red-400 mt-4">Tactics</h4>
                 <ul class="list-disc list-inside space-y-2">
-                    <li><strong>Dire Wolves:</strong> The wolves use pack tactics, attempting to surround a single character to gain the benefit of their passive ability. They will use their Hobbling Strike on heavily armored characters to make them vulnerable for the rest of the pack.</li>
-                    <li><strong>Web Phantoms:</strong> These creatures are intelligent. They will remain hidden within the thick webbing on the ceiling of the cavern, using their Webstrider ability. They will wait for the party to be distracted by the pulsating heart before dropping down to ambush spellcasters or ranged characters, using their Rocky Ambush to restrain and isolate a target.</li>
+                    <li><strong>Spider Nest Guardian:</strong> The Guardian will burst from the ground using Web Eruption to restrain and disorient the party. It will then use Spit Webbing to soften up targets from afar before closing in for devastating bites. Its primary goal is to protect the pulsating heart.</li>
+                    <li><strong>Spider Warriors:</strong> These will use the webs for cover, attempting to ambush characters who get separated. They will use their Venomous Bite on a single target to poison them, then skitter away.</li>
+                    <li><strong>Spider Worker:</strong> This minion will harass the party's flanks, trying to create openings for the larger spiders with its Group Attack.</li>
+                    <li><strong>Spider Hatchling Swarm:</strong> The swarm will use its In Your Face ability to protect the more dangerous spiders, trying to bog down heavily armored characters and make it difficult for them to target the Guardian or Warriors.</li>
                 </ul>
                 <h4 class="font-display text-xl font-bold text-red-400 mt-4">Features of the Area</h4>
                 <ul class="list-disc list-inside space-y-2">
-                    <li><strong>Illumination:</strong> Outside, dim light due to the tree's shadow. Inside the cavern, there is no light source; it is pitch black.</li>
+                    <li><strong>Illumination:</strong> Outside, dim light due to the tree's shadow. Inside the cavern, the pulsating heart provides a faint, sickly red glow (dim light).</li>
                     <li><strong>Foliage/Obscurement:</strong> Thick, gnarled roots provide half-cover throughout the area.</li>
-                    <li><strong>Webs/Entanglements:</strong> The entire area is covered in thick webs, acting as difficult terrain.</li>
+                    <li><strong>Webs/Entanglements:</strong> The entire cavern is covered in thick webs, acting as difficult terrain.</li>
+                    <li><strong>Treasure:</strong> Long lost adventurers and worse, lost people who fell into this cave who died at the chittering mandibles of the spiders left some loot that can be picked up. The characters may find the following loot with a Instinct (Perceive) roll DC 13: 1x <button class="text-red-400 hover:underline" onclick="showModal('unstableArcaneShard')">Unstable Arcane Shard</button>, 1x <button class="text-red-400 hover:underline" onclick="showModal('minorHealthPotion')">Minor Health Potion</button>, 1x <button class="text-red-400 hover:underline" onclick="showModal('improvedGrindletoothVenom')">Improved Grindletooth Venom</button>, a pair of <button class="text-red-400 hover:underline" onclick="showModal('homingCompasses')">Homing Compasses</button>.</li>
                 </ul>
                 <div class="mechanic-box p-4 rounded mt-4">
                     <strong class="text-red-400">The Shadow of the Tree (Tier 2 Environment)</strong>
                     <p><strong>Difficulty:</strong> 14 | <strong>Impulses:</strong> Protect the heart, Overwhelm intruders</p>
-                    <p><strong>Feature - Dynamic Consequence Countdown (6): The Heart Awakens:</strong> Counts down when a PC rolls with Fear; on each tick, all PCs mark 1 Stress. At 0: summon 1d4+1 <button class="text-red-400 hover:underline" onclick="showModal('spiderHatchlings')">Spider Hatchlings</button>.</p>
+                    <p><strong>Feature - The Heart Awakens (Action):</strong> Start a Dynamic Consequence Countdown (Loop 6): The countdown ticks down when a PC rolls with Fear. With each tick, all PCs mark 1 Stress. When the countdown reaches 0: summon 5 <button class="text-red-400 hover:underline" onclick="showModal('spiderWorker')">Spider Workers</button>, and reset the countdown to 6.</p>
                 </div>
             `;
              document.getElementById('beat5_content').innerHTML = `
                 <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
-                <p>Kaelen, convinced, sends the party to the witches. His daughter Lena guides them to the Trail of Treats, which magically reveals itself to her before she returns home. Along the way, they are attacked by <button class="text-red-400 hover:underline" onclick="showModal('mireGhouls')">Mire Ghouls</button>.</p>
+                <p>When the characters return to the Weaver's Dell, the ealdorman, Kaelen welcomes them and asks whatever transpired on the Hill.</p>
+                <p>Worried but resolute, Kaelen will send the players to find and contact the Ladies of the Mire, the local witches that are said to protect the swamp and its inhabitants.</p>
+                <blockquote class="read-aloud p-4 my-4">"The Ladies always seen to our plights, and the price always fair. Here in the mire, there are worse things than death. To find the Ladies, one must find the Trail of Treats. Walk up that trail, but lo! do not partake in the good hanging from the trees, elsewise you will never leave the Mire."</blockquote>
                 <blockquote class="read-aloud p-4 my-4">The path of treats is even more unsettling this time... As you follow its winding path deeper into the mangrove swamp, the dark water beside the path begins to bubble. Filthy, waterlogged shapes claw their way from the muck—bodies in a state of advanced decay, their eyes burning with a cold, dead light.</blockquote>
+                <div class="my-4">
+                    <h4 class="font-display text-xl font-bold text-red-400">Encounter: Mire Ambush</h4>
+                    <p>The characters are attacked by 2x <button class="text-red-400 hover:underline" onclick="showModal('brawnyZombie')">Brawny Zombies</button>, 1x <button class="text-red-400 hover:underline" onclick="showModal('rottedZombie')">Rotted Zombie</button>, and 3x <button class="text-red-400 hover:underline" onclick="showModal('shamblingZombie')">Shambling Zombies</button>.</p>
+                </div>
                 <h4 class="font-display text-xl font-bold text-red-400 mt-4">Map</h4>
                 <p>The combat occurs on a narrow, 10-foot wide muddy causeway surrounded by murky water. The ghouls can emerge from the water anywhere along the path. The two shacks are on a small, muddy island, 40 feet in diameter.</p>
                 <h4 class="font-display text-xl font-bold text-red-400 mt-4">Tactics</h4>
@@ -279,14 +558,29 @@
                 </ul>
                 <h4 class="font-display text-xl font-bold text-red-400 mt-4">Social</h4>
                 <p>After the combat, the party reaches the witches' sanctum. They interact with the witches through a magic painting and their servant, Agnes. The goal is to receive the ritual knife needed for the witches' price.</p>
+                <div class="my-4"><button class="text-red-400 hover:underline" onclick="showModal('theSanctum')">Learn more about The Sanctum</button></div>
              `;
              document.getElementById('beat6_content').innerHTML = `
                 <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
                 <p>The party returns to Kaelen with the knife. He leads them to his tannery for the bloody sacrifice. Afterwards, they return to the witches' sanctum.</p>
                 <blockquote class="read-aloud p-4 my-4">Kaelen takes the obsidian knife... with a swift, brutal motion, slices off his own left ear, catching it and the gush of blood in the bowl. He pushes it towards you... "This is the price of their protection," he grits out. "Now go. Finish this."</blockquote>
                 <blockquote class="read-aloud p-4 my-4">You return to the witches' sanctum... the painting of the three beautiful women ripples... they step out of the frame... Their beauty sloughs away, revealing their true forms: hideous, twisted crones... "The bargain is struck," she rasps. "The shield on the hill is gone. Go now. Destroy the heart of that place. End the threat to <i>our</i> domain." With that, they dissolve into a foul-smelling fog...</blockquote>
-                 <h4 class="font-display text-xl font-bold text-red-400">Social</h4>
+                <h4 class="font-display text-xl font-bold text-red-400">Social</h4>
                 <p>This is a narrative and social beat focused on witnessing the sacrifice and the witches' true nature. There are opportunities for roleplaying reactions to Kaelen's desperation and the witches' horrifying reveal.</p>
+                 <div class="mechanic-box p-4 rounded my-4">
+                    <h4 class="font-display text-lg font-bold text-red-400">GM Notes</h4>
+                    <p><strong>Stakes:</strong> This beat is about witnessing the true cost of the witches' power and understanding the nature of the bargain the villagers have made. The party is now an instrument of the witches' will, whether they like it or not.</p>
+                    <p class="mt-2"><strong>Mechanics:</strong> This is a narrative and roleplaying-focused beat.</p>
+                    <p class="mt-2"><strong>Checks:</strong></p>
+                    <ul class="list-disc list-inside ml-4 text-sm">
+                        <li><strong>Presence (Intimidate/Charm) check (DC 17):</strong> To attempt to stop Kaelen. He is resolute and will not be swayed, but a successful check may earn his grudging respect.</li>
+                        <li><strong>Instinct (Sense) check (DC 16):</strong> As the witches reveal their true form, a successful check allows a character to feel the immense, ancient, and deeply corrupt power they wield. This isn't just simple magic; it's something primordial and wrong.</li>
+                    </ul>
+                    <p class="mt-2"><strong>Escalations (Fear Spends):</strong></p>
+                    <ul class="list-disc list-inside ml-4 text-sm">
+                        <li><strong>Spend 1 Fear:</strong> When the witches manifest, the air grows deathly cold, and all the children in the other shack begin to wail in terror simultaneously, sensing the raw evil nearby.</li>
+                    </ul>
+                </div>
              `;
              document.getElementById('beat7_content').innerHTML = `
                 <h4 class="font-display text-xl font-bold text-red-400">Setup</h4>
@@ -296,63 +590,216 @@
                 <p>This is the same 40-foot circular cavern from Beat 4. However, the walls are now covered in pulsating egg-sacs, and thick, woody roots (difficult terrain) have erupted from the floor around the Chittering Heart.</p>
                 <h4 class="font-display text-xl font-bold text-red-400 mt-4">Tactics</h4>
                 <ul class="list-disc list-inside space-y-2">
-                    <li><strong>The Chittering Heart:</strong> As a Solo monster, it will use its Relentless feature to act twice per round. It will start by using Lashing Roots to control the battlefield and restrain characters. It will target ranged or spellcasting characters with its Venom Spit. If characters get close, it will use Skittering Limbs. Its Maddening Drone reaction makes melee combat a risky proposition. When it takes Severe damage, it will summon <button class="text-red-400 hover:underline" onclick="showModal('spiderHatchlings')">Spider Hatchlings</button> to swarm the party.</li>
+                    <li><strong>The Chittering Heart:</strong> As a Solo monster, it will use its Relentless feature to act twice per round. It will start by using Lashing Roots to control the battlefield and restrain characters. It will target ranged or spellcasting characters with its Venom Spit. If characters get close, it will use Skittering Limbs. Its Maddening Drone reaction makes melee combat a risky proposition. When it takes Severe damage, it will summon <button class="text-red-400 hover:underline" onclick="showModal('spiderHatchlingSwarm')">Spider Hatchling Swarms</button> to swarm the party.</li>
+                </ul>
+                 <h4 class="font-display text-xl font-bold text-red-400 mt-4">Features of the Area</h4>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>Illumination:</strong> The pulsating heart of the creature provides a faint, sickly red glow (dim light).</li>
+                    <li><strong>Roots/Rubble:</strong> Thick, woody roots have erupted from the floor, creating difficult terrain and half-cover.</li>
+                    <li><strong>Hazards:</strong> The walls are now covered in pulsating egg-sacs. Any character knocked into a wall causes an egg-sac to burst, releasing a <button class="text-red-400 hover:underline" onclick="showModal('spiderHatchlingSwarm')">Spider Hatchling Swarm</button>.</li>
+                    <li><strong>Treasure:</strong> After defeating the Chittering Heart, the characters can collect <button class="text-red-400 hover:underline" onclick="showModal('druidsSeed')">"The Druid's Seed"</button> special reward.</li>
                 </ul>
                 <div class="mechanic-box p-4 rounded mt-4">
                      <strong class="text-red-400">The Chittering Heart's Lair (Tier 2 Environment)</strong>
                     <p><strong>Difficulty:</strong> 15 | <strong>Impulses:</strong> Defend the heart, Unleash arachnid horrors</p>
                     <p><strong>Feature - Lashing Roots (Action - Fear):</strong> All PCs make Agility (Maneuver) Reaction Rolls (15). On a failure, they become <i>Restrained</i> until they break free with a successful Strength Roll (15).</p>
-                    <p><strong>Feature - Hatchlings (Reaction):</strong> When the Heart marks Severe damage, 1d4+1 <button class="text-red-400 hover:underline" onclick="showModal('spiderHatchlings')">Spider Hatchlings</button> erupt from sacs at Far and rush to Close at end of the round.</p>
-                </div>
-                <h4 class="font-display text-xl font-bold text-red-400 mt-4">Treasure & Project Ideas</h4>
-                <div class="p-4 bg-gray-900/50 rounded-lg border border-gray-700">
-                    <ul class="list-disc list-inside space-y-2">
-                        <li><strong>Gold:</strong> In the witches' abandoned altar room, a loose stone conceals a lockbox with <strong>2 Bags of gold</strong>.</li>
-                        <li><strong>Consumables:</strong> 2x Health Potion, 1x Vial of Darksmoke, 1x Dripfang Poison.</li>
-                        <li class="mt-4">
-                            <strong class="text-red-300">Special Reward: The Druid's Seed</strong>
-                            <p class="text-sm text-gray-400">A pulsating, chitonous seed humming with trapped power. Requires a "Work on a Project" downtime move to harness.</p>
-                            <ul class="list-circle list-inside ml-4 mt-2 space-y-1 text-sm">
-                                <li><strong>Weapon (Druid's Wrath):</strong> T3 Primary Weapon (Instinct, Melee, d10+5 magic). Feature: On hit, mark Stress to make target temporarily <i>Restrained</i>.</li>
-                                <li><strong>Armor (Chitinous Carapace):</strong> T3 Armor (Base Score 5, Thresholds 15/35). Feature: When you take Major+ melee damage, attacker takes 1d10 direct physical damage.</li>
-                                <li><strong>Item (Heart of the Hill):</strong> Once per long rest, plant the seed. It creates a Close area where allies heal 1 HP at the start of their turn. Each time it heals, GM gains 1 Fear.</li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <p><strong>Feature - Hatchlings (Reaction):</strong> When the Heart marks Severe damage, 1d4+1 <button class="text-red-400 hover:underline" onclick="showModal('spiderHatchlingSwarm')">Spider Hatchling Swarms</button> erupt from sacs at Far and rush to Close at end of the round.</p>
                 </div>
              `;
+             document.getElementById('conclusion_content').innerHTML = `
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="font-display text-xl font-bold text-red-400 mb-2">Outcome 1: The Heart is Destroyed</h3>
+                        <blockquote class="read-aloud p-4 my-4">The psychic scream ceases, replaced by an unnerving silence. The chittering horrors dissolve into black dust, and for the first time since you entered this swamp, you can breathe. But as you look back towards the village, you feel a new set of eyes upon you—ancient, cold, and utterly unopposed. The swamp is quiet, but it is not free. It has merely traded one monster for another.</blockquote>
+                        <p>By destroying the corrupted heart, the party has slain the ancient entity and freed the druid's spirit. The monstrous spiders across Hollowshade collapse into dust, and the oppressive psychic dread lifts from the land. The villagers are saved from the immediate arachnid threat, but in doing so, they have removed the only power that held the Ladies of the Forest in check. With their domain secure, the witches' influence solidifies. Their demands for tribute become more frequent, their punishments harsher. Hollowshade is "cleaner," but it is now a land ruled by undisputed tyrants, where fear is traded for a fragile, conditional safety. This is the lesser of two evils.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-xl font-bold text-red-400 mb-2">Outcome 2: The Druid is Freed</h3>
+                        <blockquote class="read-aloud p-4 my-4">The cavern trembles as the pounding heart finds a new, violent rhythm. Above you, the ground groans and splits. The great gnarled tree rips itself from the earth, its roots like writhing tentacles. A new power, born of rot and rage, now casts its shadow over Hollowshade. The witches shriek in fury from their distant sanctum, their challenge met. The war for this cursed land has just begun, and you stand at its epicenter.</blockquote>
+                        <p>By choosing not to destroy the heart, the party allows the corrupted druid's power to fully awaken. The gnarled tree on the hill shudders and rips itself from the earth, becoming a shambling, blighted titan of bark and chitin. A new, terrible power now walks the swamp. The spider infestation recedes, but in its place, a supernatural blight spreads from the hill. Plants twist into malevolent shapes, and the swamp water turns acidic. Hollowshade becomes the battleground for a war between two dark powers: the calculating cruelty of the witches versus the mindless, consuming rot of the corrupted druid. The villagers are caught in the middle, their lives now subject to the whims of two warring monsters.</p>
+                    </div>
+                </div>
+             `;
+            document.getElementById('rewards_content').innerHTML = `
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-display text-xl font-bold text-red-400 mb-2">Loot:</h3>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>1x <button class="text-red-400 hover:underline" onclick="showModal('arcanePrism')">Arcane Prism</button></li>
+                            <li>1x <button class="text-red-400 hover:underline" onclick="showModal('unstableArcaneShard')">Unstable Arcane Shard</button></li>
+                            <li>1x <button class="text-red-400 hover:underline" onclick="showModal('homingCompasses')">Homing Compass</button> (pair)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-xl font-bold text-red-400 mb-2">Consumables:</h3>
+                        <ul class="list-disc list-inside space-y-1">
+                             <li>1x <button class="text-red-400 hover:underline" onclick="showModal('stridePotion')">Stride Potion</button></li>
+                             <li>1x <button class="text-red-400 hover:underline" onclick="showModal('vialOfMoondrip')">Vial of Moondrip</button></li>
+                             <li>3x <button class="text-red-400 hover:underline" onclick="showModal('minorHealthPotion')">Minor Health Potion</button></li>
+                             <li>1x <button class="text-red-400 hover:underline" onclick="showModal('minorStaminaPotion')">Minor Stamina Potion</button></li>
+                             <li>1x <button class="text-red-400 hover:underline" onclick="showModal('varikLeaves')">Varik Leaves</button></li>
+                             <li>1x <button class="text-red-400 hover:underline" onclick="showModal('attunePotion')">Attune Potion</button></li>
+                             <li>1x <button class="text-red-400 hover:underline" onclick="showModal('improvedGrindletoothVenom')">Improved Grindletooth Venom</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-6">
+                     <h3 class="font-display text-xl font-bold text-red-400 mb-2">Special Items:</h3>
+                     <ul class="list-disc list-inside space-y-1">
+                        <li><button class="text-red-400 hover:underline" onclick="showModal('druidsSeedProject')">The Druid's Seed</button></li>
+                     </ul>
+                </div>
+            `;
         }
 
         function showModal(adversaryId) {
             const data = adversaryData[adversaryId];
             if (!data) return;
 
-            let featuresHtml = data.features.map(f => `
-                <div class="mt-3">
-                    <p class="font-semibold text-red-400">${f.name}</p>
-                    <p class="text-gray-400 text-sm">${f.text}</p>
-                </div>
-            `).join('');
-
-            modalContent.innerHTML = `
-                <div class="stat-block rounded-lg overflow-hidden">
-                    <div class="stat-block-header p-4">
-                        <h3 class="font-display text-2xl font-bold">${data.name}</h3>
-                        <p class="text-sm italic text-gray-300">${data.source}</p>
-                    </div>
-                    <div class="p-4 space-y-3">
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center pt-2">
-                            <div><p class="text-xs text-gray-400">Difficulty</p><p class="font-bold text-xl accent-red">${data.difficulty}</p></div>
-                            <div><p class="text-xs text-gray-400">Thresholds</p><p class="font-bold text-lg">${data.thresholds}</p></div>
-                            <div><p class="text-xs text-gray-400">HP</p><p class="font-bold text-xl">${data.hp}</p></div>
-                            <div><p class="text-xs text-gray-400">Stress</p><p class="font-bold text-xl">${data.stress}</p></div>
+            if (data.source === 'Item') {
+                modalContent.innerHTML = `
+                    <div class="stat-block rounded-lg overflow-hidden">
+                        <div class="stat-block-header p-4">
+                            <h3 class="font-display text-2xl font-bold">${data.name}</h3>
+                            <p class="text-sm italic text-gray-300">${data.source}</p>
                         </div>
-                        <div><p class="font-semibold text-red-400">Attack</p><p>${data.atk} | ${data.damage}</p></div>
-                         <div><p class="font-semibold text-red-400">Experience</p><p>${data.experience}</p></div>
-                        <div class="border-t border-gray-600 pt-3"><h4 class="font-display text-lg font-bold">Features</h4>${featuresHtml}</div>
+                        <div class="p-4 space-y-3">
+                            <p>${data.description}</p>
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
+                modal.style.display = 'flex';
+                return;
+            } else if (data.source === 'Special Reward') {
+                 modalContent.innerHTML = `
+                    <div class="stat-block rounded-lg overflow-hidden">
+                        <div class="stat-block-header p-4">
+                            <h3 class="font-display text-2xl font-bold">${data.name}</h3>
+                            <p class="text-sm italic text-gray-300">${data.source}</p>
+                        </div>
+                        <div class="p-4 space-y-3">
+                            <p>${data.description}</p>
+                            <p class="mt-2 text-red-300">${data.project}</p>
+                        </div>
+                    </div>
+                `;
+                modal.style.display = 'flex';
+                return;
+            } else if (data.source === 'Special Reward Project') {
+                 let outcomesHtml = data.outcomes.map(o => `
+                    <div class="mt-3">
+                        <p class="font-semibold text-red-400">${o.title}</p>
+                        <p class="text-gray-400 text-sm">${o.text}</p>
+                    </div>
+                `).join('');
+                modalContent.innerHTML = `
+                    <div class="stat-block rounded-lg overflow-hidden">
+                        <div class="stat-block-header p-4">
+                            <h3 class="font-display text-2xl font-bold">${data.name}</h3>
+                            <p class="text-sm italic text-gray-300">Special Reward</p>
+                        </div>
+                        <div class="p-4 space-y-3">
+                             <p>${data.description}</p>
+                            <p class="mt-2 text-red-300">${data.project}</p>
+                            <div class="border-t border-gray-600 pt-3 mt-4"><h4 class="font-display text-lg font-bold">Project Outcomes</h4>${outcomesHtml}</div>
+                        </div>
+                    </div>
+                `;
+                modal.style.display = 'flex';
+                return;
+            }
+            
+            if (data.source === 'NPC' || data.source === 'Tier 2 Social') {
+                 let featuresHtml = data.features ? data.features.map(f => `
+                    <div class="mt-3">
+                        <p class="font-semibold text-red-400">${f.name}</p>
+                        <p class="text-gray-400 text-sm">${f.text}</p>
+                    </div>
+                `).join('') : '';
+
+                let titleHtml = data.name;
+                let subtitleHtml = '';
+                if(data.source === 'NPC'){
+                    subtitleHtml = `<p class="text-sm italic text-gray-300">${data.community} ${data.ancestry} (${data.pronouns}) - ${data.features}</p>`
+                } else {
+                    subtitleHtml = `<p class="text-sm italic text-gray-300">${data.source}</p>`
+                }
+
+
+                modalContent.innerHTML = `
+                    <div class="stat-block rounded-lg overflow-hidden">
+                        <div class="stat-block-header p-4">
+                            <h3 class="font-display text-2xl font-bold">${titleHtml}</h3>
+                            ${subtitleHtml}
+                        </div>
+                        <div class="p-4 space-y-3">
+                            <div><p class="font-semibold text-red-400">Experience</p><p>${data.experience}</p></div>
+                            <div><p class="font-semibold text-red-400">Description</p><p class="text-gray-400">${data.description}</p></div>
+                            <div><p class="font-semibold text-red-400">Motive</p><p class="text-gray-400">${data.motive}</p></div>
+                            <div class="border-t border-gray-600 pt-3"><h4 class="font-display text-lg font-bold">Stats</h4></div>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                                <div><p class="text-xs text-gray-400">Difficulty</p><p class="font-bold text-xl accent-red">${data.difficulty}</p></div>
+                                <div><p class="text-xs text-gray-400">Thresholds</p><p class="font-bold text-lg">${data.thresholds}</p></div>
+                                <div><p class="text-xs text-gray-400">HP</p><p class="font-bold text-xl">${data.hp}</p></div>
+                                <div><p class="text-xs text-gray-400">Stress</p><p class="font-bold text-xl">${data.stress}</p></div>
+                            </div>
+                            <div><p class="font-semibold text-red-400">Attack</p><p>${data.atk} | ${data.damage}</p></div>
+                            <div class="border-t border-gray-600 pt-3"><h4 class="font-display text-lg font-bold">Features</h4>${featuresHtml}</div>
+                        </div>
+                    </div>
+                `;
+            } else if (data.source === 'Locale' || data.source === 'Environment') {
+                 let detailsHtml = data.details ? data.details.map(d => `
+                    <div class="mt-4">
+                        <p class="font-semibold text-red-400">${d.title}</p>
+                        <div class="text-gray-400 text-sm">${d.text}</div>
+                    </div>
+                 `).join('') : '';
+
+                 modalContent.innerHTML = `
+                    <div class="stat-block rounded-lg overflow-hidden">
+                        <div class="stat-block-header p-4">
+                            <h3 class="font-display text-2xl font-bold">${data.name}</h3>
+                        </div>
+                        <div class="p-4 space-y-3">
+                            ${data.description ? `<div><p class="font-semibold text-red-400">Description</p><p class="text-gray-400">${data.description}</p></div>` : ''}
+                            ${data.population ? `<div><p class="font-semibold text-red-400">Population</p><p>${data.population}</p></div>` : ''}
+                            ${data.leadership ? `<div><p class="font-semibold text-red-400">Leadership</p><p class="text-gray-400">${data.leadership}</p></div>` : ''}
+                            ${data.demographics ? `<div><p class="font-semibold text-red-400">Demographics</p><p class="text-gray-400">${data.demographics}</p></div>` : ''}
+                            ${data.economics ? `<div><p class="font-semibold text-red-400">Economics</p><p class="text-gray-400">${data.economics}</p></div>` : ''}
+                            ${data.locales ? `<div><p class="font-semibold text-red-400">Locales</p><p class="text-gray-400">${data.locales}</p></div>` : ''}
+                            ${detailsHtml}
+                        </div>
+                    </div>
+                `;
+            } else {
+                 let featuresHtml = data.features.map(f => `
+                    <div class="mt-3">
+                        <p class="font-semibold text-red-400">${f.name}</p>
+                        <p class="text-gray-400 text-sm">${f.text}</p>
+                    </div>
+                `).join('');
+
+                modalContent.innerHTML = `
+                    <div class="stat-block rounded-lg overflow-hidden">
+                        <div class="stat-block-header p-4">
+                            <h3 class="font-display text-2xl font-bold">${data.name}</h3>
+                            <p class="text-sm italic text-gray-300">${data.source}</p>
+                        </div>
+                        <div class="p-4 space-y-3">
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center pt-2">
+                                <div><p class="text-xs text-gray-400">Difficulty</p><p class="font-bold text-xl accent-red">${data.difficulty}</p></div>
+                                <div><p class="text-xs text-gray-400">Thresholds</p><p class="font-bold text-lg">${data.thresholds}</p></div>
+                                <div><p class="text-xs text-gray-400">HP</p><p class="font-bold text-xl">${data.hp}</p></div>
+                                <div><p class="text-xs text-gray-400">Stress</p><p class="font-bold text-xl">${data.stress}</p></div>
+                            </div>
+                            <div><p class="font-semibold text-red-400">Attack</p><p>${data.atk} | ${data.damage}</p></div>
+                             <div><p class="font-semibold text-red-400">Experience</p><p>${data.experience}</p></div>
+                            <div class="border-t border-gray-600 pt-3"><h4 class="font-display text-lg font-bold">Features</h4>${featuresHtml}</div>
+                        </div>
+                    </div>
+                `;
+            }
             modal.style.display = 'flex';
         }
 
@@ -360,8 +807,27 @@
             modal.style.display = 'none';
         }
 
-        document.addEventListener('DOMContentLoaded', populateContent);
+        function handleSmoothScroll(event) {
+            event.preventDefault();
+            const targetId = event.currentTarget.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            populateContent();
+            document.querySelectorAll('#sidebar a').forEach(link => {
+                link.addEventListener('click', handleSmoothScroll);
+            });
+        });
+
         document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeModal(); });
     </script>
 </body>
 </html>
+
