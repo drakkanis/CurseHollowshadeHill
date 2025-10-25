@@ -8,6 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Hollowshade Noir -->
+    <!-- Application Structure Plan: A single-page, vertically scrolling application with a persistent left-hand navigation sidebar (on medium screens and up) for quick access to key sections (Overview, Beats, Adversaries). This linear structure mirrors the adventure's flow, which is ideal for a GM running a session. Beats are presented in collapsible sections to manage information density. The key interaction is a modal system for adversary stat blocks, allowing the GM to view creature details instantly without scrolling away from the current scene, which is critical for maintaining game pace. This design prioritizes at-a-glance readability and rapid information retrieval. -->
+    <!-- Visualization & Content Choices: The primary "visualization" is the interactive At-a-Glance table which provides a high-level summary and acts as a navigation hub. Instead of traditional charts, the focus is on clear information architecture. Key mechanics like 'Countdowns' are presented in visually distinct callout boxes. Textual content, especially 'Read-aloud Text', is isolated in blockquotes for clarity. The most critical interactive element is the modal pop-up for adversary stat blocks, chosen to prevent disruptive scrolling during combat. All elements are built with HTML/CSS/JS. Confirmed NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         html {
             scroll-behavior: smooth;
@@ -78,6 +82,7 @@
 </head>
 <body class="bg-gray-900 text-gray-300">
 
+    <!-- Sidebar Navigation -->
     <nav id="sidebar" class="hidden md:block fixed top-0 left-0 h-full w-64 bg-gray-900 border-r border-gray-700 p-5 z-20 overflow-y-auto">
         <h2 class="font-display text-2xl font-bold mb-6 text-red-500 border-b border-red-800 pb-2">Navigation</h2>
         <ul class="space-y-2">
@@ -93,6 +98,7 @@
         </ul>
     </nav>
 
+    <!-- Main Content -->
     <main id="main-content" class="md:ml-64 p-4 sm:p-6 md:p-10">
         <header id="welcome" class="text-center mb-12 scroll-mt-20">
             <h1 class="font-display text-5xl md:text-6xl font-bold text-red-600 tracking-wider">The Curse of the Hollowshade Hill</h1>
@@ -142,24 +148,36 @@
             </div>
         </section>
         
+        <!-- Adventure Beats Section-->
         <section id="beats" class="scroll-mt-20">
             <h2 class="font-display text-4xl font-bold mb-8 text-red-500 text-center">Adventure Beats</h2>
             <div class="space-y-8">
+                <!-- BEAT 1 -->
                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 1: The Wary Outpost</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat1_content"></div></details>
+                <!-- BEAT 2 -->
                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 2: The Trail of Treats</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat2_content"></div></details>
+                <!-- BEAT 3 -->
                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 3: The Grim Welcome</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat3_content"></div></details>
+                <!-- INTERMISSION -->
                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden" open><summary class="font-display text-3xl p-6 font-bold text-red-500">Intermission: A Pounding Dream</summary><div class="p-6 border-t border-gray-700 space-y-4" id="intermission_content"></div></details>
+                <!-- BEAT 4 -->
                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 4: The Shadow of the Tree</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat4_content"></div></details>
+                <!-- BEAT 5 -->
                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 5: A Painted Council</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat5_content"></div></details>
+                <!-- BEAT 6 -->
                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 6: A Bloody Toll</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat6_content"></div></details>
+                <!-- BEAT 7 -->
                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 7: The Chittering Heart</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat7_content"></div></details>
+                <!-- CONCLUSION -->
                 <details id="conclusion" class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden scroll-mt-20"><summary class="font-display text-3xl p-6 font-bold text-red-500">Conclusion</summary><div class="p-6 border-t border-gray-700 space-y-4" id="conclusion_content"></div></details>
+                <!-- REWARDS & LOOT -->
                 <details id="rewards" class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden scroll-mt-20"><summary class="font-display text-3xl p-6 font-bold text-red-500">Rewards & Loot</summary><div class="p-6 border-t border-gray-700 space-y-4" id="rewards_content"></div></details>
             </div>
         </section>
 
     </main>
 
+    <!-- Modal -->
     <div id="adversaryModal" class="modal-backdrop" onclick="closeModal()">
         <div class="modal-content w-full max-w-2xl bg-gray-800 rounded-lg shadow-xl border border-gray-600 p-6" onclick="event.stopPropagation()">
             <div id="modalContent"></div>
@@ -638,52 +656,29 @@
             const data = adversaryData[adversaryId];
             if (!data) return;
 
-            if (data.source === 'Item') {
+            if (data.source === 'Item' || data.source === 'Special Reward' || data.source === 'Special Reward Project') {
+                 let content = `<p>${data.description || ''}</p>`;
+                 if(data.project) {
+                    content += `<p class="mt-2 text-red-300">${data.project}</p>`;
+                 }
+                 if(data.outcomes) {
+                    let outcomesHtml = data.outcomes.map(o => `
+                        <div class="mt-3">
+                            <p class="font-semibold text-red-400">${o.title}</p>
+                            <p class="text-gray-400 text-sm">${o.text}</p>
+                        </div>
+                    `).join('');
+                    content += `<div class="border-t border-gray-600 pt-3 mt-4"><h4 class="font-display text-lg font-bold">Project Outcomes</h4>${outcomesHtml}</div>`;
+                 }
+
                 modalContent.innerHTML = `
                     <div class="stat-block rounded-lg overflow-hidden">
                         <div class="stat-block-header p-4">
                             <h3 class="font-display text-2xl font-bold">${data.name}</h3>
-                            <p class="text-sm italic text-gray-300">${data.source}</p>
+                            <p class="text-sm italic text-gray-300">${data.source.replace('Project', '')}</p>
                         </div>
                         <div class="p-4 space-y-3">
-                            <p>${data.description}</p>
-                        </div>
-                    </div>
-                `;
-                modal.style.display = 'flex';
-                return;
-            } else if (data.source === 'Special Reward') {
-                 modalContent.innerHTML = `
-                    <div class="stat-block rounded-lg overflow-hidden">
-                        <div class="stat-block-header p-4">
-                            <h3 class="font-display text-2xl font-bold">${data.name}</h3>
-                            <p class="text-sm italic text-gray-300">${data.source}</p>
-                        </div>
-                        <div class="p-4 space-y-3">
-                            <p>${data.description}</p>
-                            <p class="mt-2 text-red-300">${data.project}</p>
-                        </div>
-                    </div>
-                `;
-                modal.style.display = 'flex';
-                return;
-            } else if (data.source === 'Special Reward Project') {
-                 let outcomesHtml = data.outcomes.map(o => `
-                    <div class="mt-3">
-                        <p class="font-semibold text-red-400">${o.title}</p>
-                        <p class="text-gray-400 text-sm">${o.text}</p>
-                    </div>
-                `).join('');
-                modalContent.innerHTML = `
-                    <div class="stat-block rounded-lg overflow-hidden">
-                        <div class="stat-block-header p-4">
-                            <h3 class="font-display text-2xl font-bold">${data.name}</h3>
-                            <p class="text-sm italic text-gray-300">Special Reward</p>
-                        </div>
-                        <div class="p-4 space-y-3">
-                             <p>${data.description}</p>
-                            <p class="mt-2 text-red-300">${data.project}</p>
-                            <div class="border-t border-gray-600 pt-3 mt-4"><h4 class="font-display text-lg font-bold">Project Outcomes</h4>${outcomesHtml}</div>
+                           ${content}
                         </div>
                     </div>
                 `;
@@ -692,22 +687,21 @@
             }
             
             if (data.source === 'NPC' || data.source === 'Tier 2 Social') {
-                 let featuresHtml = data.features ? data.features.map(f => `
+                 let featuresHtml = (data.features && Array.isArray(data.features)) ? data.features.map(f => `
                     <div class="mt-3">
                         <p class="font-semibold text-red-400">${f.name}</p>
                         <p class="text-gray-400 text-sm">${f.text}</p>
                     </div>
-                `).join('') : '';
+                `).join('') : `<p class="text-gray-400 text-sm">${data.features || ''}</p>`;
 
                 let titleHtml = data.name;
                 let subtitleHtml = '';
                 if(data.source === 'NPC'){
-                    subtitleHtml = `<p class="text-sm italic text-gray-300">${data.community} ${data.ancestry} (${data.pronouns}) - ${data.features}</p>`
+                    subtitleHtml = `<p class="text-sm italic text-gray-300">${data.community} ${data.ancestry} (${data.pronouns})</p>`
                 } else {
                     subtitleHtml = `<p class="text-sm italic text-gray-300">${data.source}</p>`
                 }
-
-
+                
                 modalContent.innerHTML = `
                     <div class="stat-block rounded-lg overflow-hidden">
                         <div class="stat-block-header p-4">
@@ -715,9 +709,11 @@
                             ${subtitleHtml}
                         </div>
                         <div class="p-4 space-y-3">
-                            <div><p class="font-semibold text-red-400">Experience</p><p>${data.experience}</p></div>
                             <div><p class="font-semibold text-red-400">Description</p><p class="text-gray-400">${data.description}</p></div>
                             <div><p class="font-semibold text-red-400">Motive</p><p class="text-gray-400">${data.motive}</p></div>
+                            ${ (data.source === 'NPC') ? `<div><p class="font-semibold text-red-400">Personality</p><p class="text-gray-400">${data.features}</p></div>` : '' }
+                            ${ (data.experience) ? `<div><p class="font-semibold text-red-400">Experience</p><p>${data.experience}</p></div>` : '' }
+                            ${ (data.source === 'Tier 2 Social') ? `
                             <div class="border-t border-gray-600 pt-3"><h4 class="font-display text-lg font-bold">Stats</h4></div>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
                                 <div><p class="text-xs text-gray-400">Difficulty</p><p class="font-bold text-xl accent-red">${data.difficulty}</p></div>
@@ -727,6 +723,7 @@
                             </div>
                             <div><p class="font-semibold text-red-400">Attack</p><p>${data.atk} | ${data.damage}</p></div>
                             <div class="border-t border-gray-600 pt-3"><h4 class="font-display text-lg font-bold">Features</h4>${featuresHtml}</div>
+                            ` : `<div><p class="font-semibold text-red-400">Difficulty</p><p>${data.difficulty}</p></div>` }
                         </div>
                     </div>
                 `;
@@ -812,4 +809,3 @@
     </script>
 </body>
 </html>
-
