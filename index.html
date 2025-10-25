@@ -248,7 +248,7 @@
                 features: [
                     { name: 'Slow (Passive)', text: 'When you spotlight the Zombie and they don’t have a token on their stat block, they can’t act yet. Place a token on their stat block and describe what they’re preparing to do. When you spotlight the Zombie and they have a token on their stat block, clear the token and they can act.' },
                     { name: 'Rend Asunder (Action)', text: 'Make a standard attack with advantage against a target the Zombie has <i>Restrained</i>. On a success, the attack deals direct damage.' },
-                    { name: 'Rip and Tear (Reaction)', text: 'When the Zombie makes a successful standard attack, you can mark a Stress to temporarily <i>Restrain</i> the target and force them to mark 2 Stress.' }
+                    { name: 'Rip and Tear (Reaction)', text: 'When the Zombie makes a successful standard attack, you can mark a Stress to temporarily <i>Restrained</i> the target and force them to mark 2 Stress.' }
                 ]
             },
             rottedZombie: {
@@ -692,7 +692,7 @@
                         <p class="font-semibold text-red-400">${f.name}</p>
                         <p class="text-gray-400 text-sm">${f.text}</p>
                     </div>
-                `).join('') : `<p class="text-gray-400 text-sm">${data.features || ''}</p>`;
+                `).join('') : '';
 
                 let titleHtml = data.name;
                 let subtitleHtml = '';
@@ -809,3 +809,4 @@
     </script>
 </body>
 </html>
+
