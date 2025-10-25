@@ -159,7 +159,7 @@
                 <!-- BEAT 3 -->
                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 3: The Grim Welcome</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat3_content"></div></details>
                 <!-- INTERMISSION -->
-                <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden" open><summary class="font-display text-3xl p-6 font-bold text-red-500">Intermission: A Pounding Dream</summary><div class="p-6 border-t border-gray-700 space-y-4" id="intermission_content"></div></details>
+                <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Intermission: A Pounding Dream</summary><div class="p-6 border-t border-gray-700 space-y-4" id="intermission_content"></div></details>
                 <!-- BEAT 4 -->
                 <details class="bg-gray-800/50 rounded-lg border border-gray-700 overflow-hidden"><summary class="font-display text-3xl p-6 font-bold text-red-500">Beat 4: The Shadow of the Tree</summary><div class="p-6 border-t border-gray-700 space-y-4" id="beat4_content"></div></details>
                 <!-- BEAT 5 -->
@@ -711,8 +711,9 @@
                         <div class="p-4 space-y-3">
                             <div><p class="font-semibold text-red-400">Description</p><p class="text-gray-400">${data.description}</p></div>
                             <div><p class="font-semibold text-red-400">Motive</p><p class="text-gray-400">${data.motive}</p></div>
-                            ${ (data.source === 'NPC') ? `<div><p class="font-semibold text-red-400">Personality</p><p class="text-gray-400">${data.features}</p></div>` : '' }
+                            ${ (data.source === 'NPC' && data.features && typeof data.features === 'string') ? `<div><p class="font-semibold text-red-400">Personality</p><p class="text-gray-400">${data.features}</p></div>` : '' }
                             ${ (data.experience) ? `<div><p class="font-semibold text-red-400">Experience</p><p>${data.experience}</p></div>` : '' }
+                            
                             ${ (data.source === 'Tier 2 Social') ? `
                             <div class="border-t border-gray-600 pt-3"><h4 class="font-display text-lg font-bold">Stats</h4></div>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
@@ -752,12 +753,12 @@
                     </div>
                 `;
             } else {
-                 let featuresHtml = data.features.map(f => `
+                 let featuresHtml = (data.features && Array.isArray(data.features)) ? data.features.map(f => `
                     <div class="mt-3">
                         <p class="font-semibold text-red-400">${f.name}</p>
                         <p class="text-gray-400 text-sm">${f.text}</p>
                     </div>
-                `).join('');
+                `).join('') : '';
 
                 modalContent.innerHTML = `
                     <div class="stat-block rounded-lg overflow-hidden">
